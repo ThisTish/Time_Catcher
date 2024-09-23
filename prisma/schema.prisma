@@ -1,0 +1,81 @@
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Color {
+  RED
+  BLUE
+  GREEN
+  YELLOW
+  ORANGE
+  PURPLE
+  PINK
+  BROWN
+  GREY
+  BLACK
+  WHITE
+}
+
+enum Period {
+  DAY
+  WEEK
+  MONTH
+  SEASON
+  YEAR
+}
+
+model User { 
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  categories Category[]
+  goals Goal[]
+  timeLogs TimeLog[]
+}
+
+model Category { 
+  id String @id @default(uuid())
+  name String @unique
+  userId String
+  color Color
+  totalTime Float
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  goals Goal[]
+  timeLogs TimeLog[]
+  @@index([userId])
+}
+
+model Goal { 
+  id String @id @default(uuid())
+  name String
+  userId String
+  categoryId String
+  targetTime Float
+  period Period
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  @@index([userId])
+  @@index([categoryId])
+}
+
+model TimeLog {
+  userId String
+  categoryId String
+  startTime DateTime
+  endTime DateTime
+  timePassed Float
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  @@id([userId, categoryId, startTime])
+}

@@ -6,8 +6,8 @@ const Guest = () => {
 
 			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
 				<h1>Welcome!</h1>
-				<p>Please login start catching your time</p>
-				<div className="btn btn-warning text-light"><SignInButton /></div>
+				<p>Please login to start catching your time</p>
+				<SignInButton />
 			</main>
 		</div>
 	);

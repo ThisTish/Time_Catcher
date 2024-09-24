@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 import {  ClerkProvider } from '@clerk/nextjs'
-
+import { Toaster } from '@/components/ui/toaster'
 import NavBar from "@/components/NavBar"
 import Footer from '@/components/Footer'
 
@@ -37,6 +37,7 @@ export default function RootLayout({
           <NavBar />
           {children}
           <Footer />
+          <Toaster />
         </body>
       </html>
     </ClerkProvider>

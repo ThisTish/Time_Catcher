@@ -9,11 +9,11 @@ datasource db {
 }
 
 enum Color {
-  RED
   BLUE
   GREEN
   YELLOW
   ORANGE
+  RED
   PURPLE
   PINK
   BROWN

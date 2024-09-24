@@ -1,10 +1,10 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
-import {
-  ClerkProvider
-} from '@clerk/nextjs'
+import {  ClerkProvider } from '@clerk/nextjs'
+
 import NavBar from "@/components/NavBar"
+import Footer from '@/components/Footer'
 
 
 const geistSans = localFont({
@@ -36,6 +36,7 @@ export default function RootLayout({
         >
           <NavBar />
           {children}
+          <Footer />
         </body>
       </html>
     </ClerkProvider>

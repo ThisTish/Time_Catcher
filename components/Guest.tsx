@@ -2,10 +2,13 @@ import { SignInButton } from "@clerk/nextjs";
 
 const Guest = () => {
 	return (
-		<div className="">
-			<h1>Welcome!</h1>
-			<p>Please login to manage your transactions</p>
-			<SignInButton />
+		<div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+
+			<main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+				<h1>Welcome!</h1>
+				<p>Please login start catching your time</p>
+				<div className="btn btn-warning text-light"><SignInButton /></div>
+			</main>
 		</div>
 	);
 }

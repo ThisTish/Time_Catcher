@@ -7,9 +7,7 @@ const config: Config = {
 		"./components/**/*.{js,ts,jsx,tsx,mdx}",
 		"./app/**/*.{js,ts,jsx,tsx,mdx}",
 	],
-	daisyui: {
-		themes:["retro", "coffee"]
-	},
+
 	theme: {
 		extend: {
 			colors:{
@@ -21,7 +19,6 @@ const config: Config = {
 	plugins: [
 		require("tailwindcss-animate"),
 		require("@tailwindcss/typography"),
-		require("daisyui")
 	],
 }
 

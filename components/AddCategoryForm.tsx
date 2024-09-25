@@ -92,7 +92,7 @@ return (
 					<FormItem>
 						<FormLabel>Color</FormLabel>
 						<FormControl>
-							<Select>
+							<Select onValueChange={field.onChange} value={field.value}>
 								<SelectTrigger >
 									<SelectValue placeholder="Choose a Color" />
 								</SelectTrigger>

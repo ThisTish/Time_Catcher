@@ -61,7 +61,8 @@ const AddCategoryForm = () => {
 
 		if (result.data) {
 			toast({
-				description: `Category ${result.data.name} added successfully!`
+				description: `Category ${result.data.name} added successfully!`,
+				duration: 4000
 			})
 			form.reset()
 }

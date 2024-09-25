@@ -1,6 +1,8 @@
 import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@clerk/nextjs"
 import Link from "next/link";
-import { checkUser } from "@/lib/checkUser";
+import { checkUser } from "@/lib/checkUser"
+import AddCategoryDrawer from "@/components/AddCategoryDrawer"
+
 
 const NavBar = () => {
 	const user = checkUser()
@@ -15,6 +17,7 @@ const NavBar = () => {
 					</SignedOut>
 					<SignedIn>
 						{/* <SignOutButton /> */}
+						<AddCategoryDrawer />
 						<UserButton appearance={{elements: {avatarBox: 'size-10'} }}/>
 					</SignedIn>
 					</nav>

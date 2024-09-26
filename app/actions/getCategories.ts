@@ -9,6 +9,8 @@ interface CategoryData {
 	name: string
 	color: Color
 	userId: string
+	totalTime: number
+	id: string
 }
 
 interface CategoryResult {

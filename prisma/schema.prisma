@@ -74,7 +74,7 @@ model TimeLog {
   userId String
   categoryId String
   startTime DateTime
-  endTime DateTime
+  endTime DateTime?
   timePassed Float
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)

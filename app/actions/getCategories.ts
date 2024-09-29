@@ -2,21 +2,7 @@
 import { auth } from "@clerk/nextjs/server"
 import { db } from "@/lib/db"
 import { Color } from "@prisma/client"
-
-
-
-interface CategoryData {
-	name: string
-	color: Color
-	userId: string
-	totalTime: number
-	id: string
-}
-
-interface CategoryResult {
-	data?: CategoryData[]
-	error?: string
-}
+import { CategoryData, CategoryResult } from "@/lib/types"
 
 async function getCategories(): Promise<CategoryResult> {
 

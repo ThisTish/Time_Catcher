@@ -1,3 +1,5 @@
+'use client'
+
 import {
 	Card,
 	CardContent,
@@ -9,6 +11,7 @@ import {
 import { Button } from "./ui/button"
 import GoalCard from "./GoalCard"
 import { Color } from "@prisma/client"
+import StartButton from "./StartButton"
 
 interface CategoryCardProps {
 	id: string
@@ -28,7 +31,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 		RED: 'bg-red-300 shadow-red-900',
 		PURPLE: 'bg-purple-300 shadow-purple-900',
 		PINK: 'bg-pink-300 shadow-pink-900',
-		BLACK: 'bg-stone-900 shadow-stone-50 text-white',
+		BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
 		WHITE: 'bg-white shadow-stone-900',
 	}
 	
@@ -50,7 +53,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 				<Button variant={"outline"}>Pause</Button>
 				<Button variant={"default"}>End</Button> : (Start)
 				*/}
-				<Button variant={"secondary"} className="shadow-md hover:shadow-none hover:scale-90 transition-transform ease-in duration-75 active:opacity-0" data-categoryId={id}>Start</Button>
+				<StartButton categoryId={id} />
 			</CardFooter>
 		</Card>
 	);

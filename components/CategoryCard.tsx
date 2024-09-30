@@ -49,11 +49,6 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 			</CardContent>
 				<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">{totalTime}</p>
 			<CardFooter className="flex gap-3">
-				{/* <p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">timer</p>current tracking time? */}
-				{/* if currentTime is greater than startTime, or start button onclick(setStatus)
-				<Button variant={"outline"}>Pause</Button>
-				<Button variant={"default"}>End</Button> : (Start)
-				*/}
 				<StopButton id={timeLogId}/>
 				<StartButton categoryId={id} />
 			</CardFooter>

@@ -1,7 +1,5 @@
 import { ReactEventHandler } from "react"
 import { Button } from "./ui/button"
-import { TimeLogData } from "@/lib/types"
-import { TimeLogResult } from "@/lib/types"
 import startTimeLog from "@/app/actions/startTimeLog"
 import { useTimerContext } from "@/hooks/useTimerContext"
 
@@ -27,8 +25,6 @@ const StartButton = ({categoryId}: {categoryId: string}) => {
 		}catch(error){
 			console.log(error)
 		}
-		
-
 	}
 	
 	return (

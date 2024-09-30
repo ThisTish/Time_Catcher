@@ -7,23 +7,20 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card"
+import { useEffect, useState } from "react"
 import GoalCard from "./GoalCard"
 import { Color } from "@prisma/client"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
 import { useTimerContext } from "@/hooks/useTimerContext"
+import { CategoryCardProps } from "@/lib/types"
 
-interface CategoryCardProps {
-	id: string
-	name: string
-	color: Color
-	totalTime: number
-}
+
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id }) => {
+	const [timer, setTimer] = useState<number>(0)
 
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
-
 	const colorClasses: { [key: string]: string } = {
 		BLUE: 'bg-blue-300 shadow-blue-900',
 		GREEN: 'bg-green-300 shadow-green-900',
@@ -35,6 +32,23 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id 
 		BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
 		WHITE: 'bg-white shadow-stone-900',
 	}
+
+	useEffect(() =>{
+		let timerInterval: NodeJS.Timeout | null = null;
+	
+		if(startTime){
+			timerInterval = setInterval(() =>{
+				let currentTime = new Date().getTime()
+				let currentTimePassed = Math.floor((currentTime - new Date(startTime).getTime()) /1000)
+				setTimer(currentTimePassed)
+			}, 1000)
+		}
+		return () =>{
+			if(timerInterval){
+				clearInterval(timerInterval)
+			}
+		}	
+}, [startTime])
 
 
 	return (
@@ -54,7 +68,9 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id 
 				<CardFooter className="flex gap-3">
 					{categoryId === id ? (
 						<div className="flex flex-col text-center">
-							<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">{totalTime}</p>
+							<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
+								{`${Math.floor(timer/60)} min ${timer % 60} sec`}
+							</p>
 
 							<StopButton id={timeLogId} startTime={startTime} />
 						</div>

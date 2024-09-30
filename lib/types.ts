@@ -57,3 +57,10 @@ export interface TimerProviderProps {
 	} | null
 
 }
+
+export interface CategoryCardProps {
+	id: string
+	name: string
+	color: Color
+	totalTime: number
+}

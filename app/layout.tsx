@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
-import {  ClerkProvider } from '@clerk/nextjs'
+import { ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from '@/components/ui/toaster'
 import NavBar from "@/components/NavBar"
 import Footer from '@/components/Footer'
@@ -31,33 +31,36 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  
-  const {data, error } = await getTimeLog()
-  if(error) return console.log('error getting current timer')
-  if(!data) return null
 
-  const currentTimer = {
-    id: data.id,
-    userId: data.userId,
-    categoryId: data.categoryId,
-    startTime: data.startTime,
-    endTime: data.endTime,
-    timePassed: data.timePassed
+  const getCurrentTimer = async () => {
+    const { data, error } = await getTimeLog()
+    if (data) {
+      const currentTimer = {
+        id: data.id,
+        userId: data.userId,
+        categoryId: data.categoryId,
+        startTime: data.startTime,
+        endTime: data.endTime,
+        timePassed: data.timePassed
+      }
+      return currentTimer
+    }
   }
-  
+  const currentTimerContext = await getCurrentTimer()
+
   return (
     <ClerkProvider>
-      <TimerProvider ongoingTimer={currentTimer || null}>
-      <html lang="en">
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        >
-          <NavBar />
-          {children}
-          <Footer />
-          <Toaster />
-        </body>
-      </html>
+      <TimerProvider ongoingTimer={currentTimerContext || null}>
+        <html lang="en">
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          >
+            <NavBar />
+            {children}
+            <Footer />
+            <Toaster />
+          </body>
+        </html>
       </TimerProvider>
     </ClerkProvider>
   )

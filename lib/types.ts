@@ -1,5 +1,6 @@
 import { Color } from "@prisma/client"
 import { User } from "@prisma/client"
+import { ReactNode } from "react"
 
 export interface CategoryData {
 	name: string
@@ -16,6 +17,7 @@ export interface CategoryResult {
 
 
 export interface TimeLogData {
+	id: string
 	userId: string
 	categoryId: string
 	startTime?: Date
@@ -32,3 +34,14 @@ export interface UserResult {
 	error?: string
 }
 
+
+export interface TimerContextProps {
+	status: 'idle' | 'running';
+	timeLogId: string | null;
+	startTimer: (id: string) => void;
+	stopTimer: () => void;
+}
+
+export interface TimerProviderProps {
+	children: ReactNode;
+}

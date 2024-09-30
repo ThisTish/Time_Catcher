@@ -5,6 +5,7 @@ import {  ClerkProvider } from '@clerk/nextjs'
 import { Toaster } from '@/components/ui/toaster'
 import NavBar from "@/components/NavBar"
 import Footer from '@/components/Footer'
+import { TimerProvider } from "@/hooks/useTimerContext"
 
 
 const geistSans = localFont({
@@ -30,6 +31,7 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
+      <TimerProvider>
       <html lang="en">
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
@@ -40,6 +42,7 @@ export default function RootLayout({
           <Toaster />
         </body>
       </html>
+      </TimerProvider>
     </ClerkProvider>
   )
 }

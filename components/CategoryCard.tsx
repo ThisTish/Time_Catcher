@@ -3,15 +3,15 @@
 import {
 	Card,
 	CardContent,
-	CardDescription,
 	CardFooter,
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card"
-import { Button } from "./ui/button"
 import GoalCard from "./GoalCard"
 import { Color } from "@prisma/client"
 import StartButton from "./StartButton"
+import StopButton from "./StopButton"
+import { useTimerContext } from "@/hooks/useTimerContext"
 
 interface CategoryCardProps {
 	id: string
@@ -22,6 +22,8 @@ interface CategoryCardProps {
 }
 
 const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, userId, id}  ) => {
+
+	const { timeLogId } = useTimerContext()
 
 	const colorClasses: {[key: string]: string} = {
 		BLUE: 'bg-blue-300 shadow-blue-900',
@@ -43,8 +45,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 			</CardHeader>
 			<CardContent>
 
-				{/* for every goal, a new card in the main card will show. As the goal progresses, the gradient color will fill the goal card.*/}
-				{/* <GoalCard /> */}
+				{/*{GoalCard && (<GoalCard />)}*/}
 			</CardContent>
 				<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">{totalTime}</p>
 			<CardFooter className="flex gap-3">
@@ -53,6 +54,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 				<Button variant={"outline"}>Pause</Button>
 				<Button variant={"default"}>End</Button> : (Start)
 				*/}
+				<StopButton id={timeLogId}/>
 				<StartButton categoryId={id} />
 			</CardFooter>
 		</Card>

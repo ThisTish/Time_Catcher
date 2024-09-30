@@ -6,16 +6,15 @@ import findUser from './findUser'
 
 
 
-async function startTimeLog({id}: {id: string}): Promise<TimeLogResult> {
-	const categoryId = id
+async function startTimeLog({id}: {id: string | null}): Promise<TimeLogResult> {
 
+	const categoryId = id
 	if (!categoryId) {
 		return { error: 'Problem with Category is missing' }
 	}
 
 	const user = await findUser()
 	const userId = user.data?.id.toString()
-
 	if (!userId) {
 		return { error: 'User login error' }
 	}
@@ -25,7 +24,6 @@ async function startTimeLog({id}: {id: string}): Promise<TimeLogResult> {
 	console.log(`CategoryId: ${categoryId} userId: ${userId} startTime: ${startTime}`)	
 
 	try {
-		console.log('here to start timer')
 		const TimeLogData: TimeLogData = await db.timeLog.create({
 			data: {
 					startTime,
@@ -36,11 +34,11 @@ async function startTimeLog({id}: {id: string}): Promise<TimeLogResult> {
 			}
 		})
 		console.log('TimeLogData 11',TimeLogData)
-		console.dir(TimeLogData, { colors: true })
 		return { data: TimeLogData }
 	} catch (error) {
 		return { error: 'Error with starting timer!' }
 	}
+	
 }
 
 

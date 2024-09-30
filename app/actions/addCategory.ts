@@ -5,6 +5,7 @@ import { Color } from "@prisma/client"
 import { CategoryData } from "@/lib/types"
 import { CategoryResult } from "@/lib/types"
 import findUser from "./findUser"
+import { revalidatePath } from "next/cache"
 
 
 async function addCategory(formData: FormData): Promise<CategoryResult> {
@@ -36,6 +37,7 @@ async function addCategory(formData: FormData): Promise<CategoryResult> {
 				totalTime: 0
 			}
 		})
+		revalidatePath('/')
 		return { data: [CategoryData]}
 	} catch (error) {
 		return { error: `Error adding category, please try again. ${error}` }

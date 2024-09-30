@@ -6,7 +6,7 @@ import { useTimerContext } from "@/hooks/useTimerContext"
 
 
 
-const StartButton = ({categoryId}: {categoryId: string}) => {
+const StartButton = ({categoryId, disabled}: {categoryId: string; disabled?: boolean}) => {
 	const { startTimer} = useTimerContext()
 
 	const handleStart: ReactEventHandler = async (event) => {
@@ -19,8 +19,8 @@ const StartButton = ({categoryId}: {categoryId: string}) => {
 			}
 			if(result.data){
 				const timeLogId = result.data.id
-				console.log(timeLogId)
-				startTimer(timeLogId)
+				console.log('starting with timelog and category id',timeLogId, categoryId)
+				startTimer(timeLogId, categoryId)
 			}
 		}catch(error){
 			console.log(error)
@@ -32,6 +32,7 @@ const StartButton = ({categoryId}: {categoryId: string}) => {
 			variant={"secondary"}
 			className={`text-black shadow-lg hover:shadow-none hover:scale-90 transition-transform ease-in duration-75 active:opacity-0`} 
 			onClick={handleStart}
+			disabled={disabled}
 			>
 			Start
 		</Button>

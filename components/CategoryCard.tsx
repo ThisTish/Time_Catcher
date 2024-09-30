@@ -18,14 +18,13 @@ interface CategoryCardProps {
 	name: string
 	color: Color
 	totalTime: number
-	userId: string
 }
 
-const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, userId, id}  ) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id }) => {
 
-	const { timeLogId } = useTimerContext()
+	const { timeLogId, categoryId, status } = useTimerContext()
 
-	const colorClasses: {[key: string]: string} = {
+	const colorClasses: { [key: string]: string } = {
 		BLUE: 'bg-blue-300 shadow-blue-900',
 		GREEN: 'bg-green-300 shadow-green-900',
 		YELLOW: 'bg-yellow-300 shadow-yellow-900',
@@ -36,7 +35,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 		BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
 		WHITE: 'bg-white shadow-stone-900',
 	}
-	
+
 
 	return (
 		<Card className={`flex flex-col items-center shadow-inner ${colorClasses[color]} min-w-64  `}>
@@ -44,14 +43,35 @@ const CategoryCard: React.FC<CategoryCardProps> = ({name, color, totalTime, user
 				<CardTitle>{name}</CardTitle>
 			</CardHeader>
 			<CardContent>
-
 				{/*{GoalCard && (<GoalCard />)}*/}
 			</CardContent>
-				<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">{totalTime}</p>
-			<CardFooter className="flex gap-3">
-				<StopButton id={timeLogId}/>
-				<StartButton categoryId={id} />
+			<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">{totalTime}</p>
+
+			{status === 'idle' ? (
+				<CardFooter className="flex gap-3">
+					<StartButton categoryId={id} />
+				</CardFooter>
+			):(
+				<CardFooter className="flex gap-3">
+				{categoryId === id ? (
+					<StopButton id={timeLogId} />
+				):(
+					<StartButton categoryId={id} disabled={true} />
+				)
+			}		
 			</CardFooter>
+			)
+		}	
+		
+
+			{/* {status === 'running' && categoryId === id} */}
+{/* <StopButton id={timeLogId} /> */}
+{/* 
+				<CardFooter className="flex gap-3">
+					
+					<StartButton categoryId={id} />
+				</CardFooter> */}
+
 		</Card>
 	);
 }

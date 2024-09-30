@@ -36,12 +36,13 @@ export interface UserResult {
 
 
 export interface TimerContextProps {
-	status: 'idle' | 'running';
-	timeLogId: string | null;
-	startTimer: (id: string) => void;
-	stopTimer: () => void;
+	status: 'idle' | 'running'
+	timeLogId: string | null
+	categoryId: string | null
+	startTimer: (timeLogId: string, categoryId: string) => void
+	stopTimer: () => void
 }
 
 export interface TimerProviderProps {
-	children: ReactNode;
+	children: ReactNode
 }

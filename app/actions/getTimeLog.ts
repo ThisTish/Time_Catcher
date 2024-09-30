@@ -1,21 +1,20 @@
-// 'use server'
-// import { db } from "@/lib/db"
-// import { TimeLogData, TimeLogResult } from "@/lib/types"
+'use server'
+import { db } from "@/lib/db"
+import { TimeLogData, TimeLogResult } from "@/lib/types"
 
-// const getTimeLog = async (): Promise<TimeLogResult> =>{
-// 	const currentTimeLog = await db.timeLog.findFirst({
-// 		where: {
-// 			endTime: null
-// 		}
-// 	})
-// 	if (!currentTimeLog) {
-// 		return { error: 'No current time log found' }
-// 	}
-// 	console.dir(`CurrentTimeLog! ${JSON.stringify(currentTimeLog)}`)
-// 	return { data: currentTimeLog }
-// }
+const getTimeLog = async (): Promise<TimeLogResult> =>{
+	const currentTimeLog = await db.timeLog.findFirst({
+		where: {
+			endTime: null
+		}
+	})
+	if (!currentTimeLog) {
+		return { error: 'No current time log found' }
+	}
+	return { data: currentTimeLog }
+}
 
-// export default getTimeLog
+export default getTimeLog
 
 
 

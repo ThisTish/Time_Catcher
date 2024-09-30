@@ -6,7 +6,7 @@ import { useTimerContext } from "@/hooks/useTimerContext"
 import stopTimeLog from "@/app/actions/stopTimeLog"
 
 
-const StopButton = ({ id }: { id: string | null }) => {
+const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | null }) => {
 
 	const { stopTimer, status, timeLogId } = useTimerContext()
 
@@ -16,7 +16,7 @@ const StopButton = ({ id }: { id: string | null }) => {
 
 		if (id !== null) {
 			try {
-				const result = await stopTimeLog({ id })
+				const result = await stopTimeLog({ id, startTime })
 				if (result.error) {
 					return console.log('error with startTime creation/info')
 				}
@@ -36,6 +36,7 @@ const StopButton = ({ id }: { id: string | null }) => {
 			<Button
 				onClick={handleStop}
 				data-timelog-id={id}
+				data-start-time={startTime}
 			>Stop</Button>
 		</div>
 	)

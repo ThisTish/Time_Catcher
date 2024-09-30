@@ -1,29 +1,31 @@
 'use server'
 import { db } from '@/lib/db'
 import { TimeLogData, TimeLogResult } from '@/lib/types'
-import { useTimerContext } from '@/hooks/useTimerContext'
 
+async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | null }): Promise<TimeLogResult> {
 
+		const endTime = new Date()
+		if(!startTime) return { error: 'error with startTime for this time log'}
+		const timePassed = endTime.getTime() - new Date(startTime).getTime()
+		console.log('timePassed', timePassed)
 
-async function stopTimeLog({id}: {id: string }): Promise<TimeLogResult> {
-	
-	const endTime = new Date()
+		try {
+			const TimeLogData: TimeLogData = await db.timeLog.update({
+				where: { id },
+				data: {
+					endTime,
+					timePassed
+				}
+			})
 
-	try{
-		const TimeLogData: TimeLogData = await db.timeLog.update({
-			where: { id },
-			data: {
-				endTime
-			}
-		})
+			console.dir(TimeLogData, { colors: true })
 
-		console.dir(TimeLogData, { colors: true })
+			return { data: TimeLogData }
 		
-		return { data: TimeLogData }
-	}catch(error){
-		return {error: 'error finding timer to stop'}
+		} catch (error) {
+			return { error: 'error finding timer to stop' }
+		}
 	}
-}
 
 
 export default stopTimeLog

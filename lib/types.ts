@@ -20,8 +20,9 @@ export interface TimeLogData {
 	id: string
 	userId: string
 	categoryId: string
-	startTime?: Date
-	timePassed?: number
+	startTime: Date | null
+	endTime: Date | null
+	timePassed: number
 }
 
 export interface TimeLogResult {
@@ -39,10 +40,20 @@ export interface TimerContextProps {
 	status: 'idle' | 'running'
 	timeLogId: string | null
 	categoryId: string | null
+	startTime: Date | null
 	startTimer: (timeLogId: string, categoryId: string) => void
 	stopTimer: () => void
 }
 
 export interface TimerProviderProps {
 	children: ReactNode
+	ongoingTimer: {
+		id: string
+		userId: string
+		categoryId: string
+		startTime: Date | null
+		endTime: Date | null
+		timePassed: number 
+	} | null
+
 }

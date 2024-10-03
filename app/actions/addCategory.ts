@@ -2,8 +2,7 @@
 import { auth, User } from "@clerk/nextjs/server"
 import { db } from "@/lib/db"
 import { Color } from "@prisma/client"
-import { CategoryData } from "@/lib/types"
-import { CategoryResult } from "@/lib/types"
+import { CategoryData, CategoryResult } from "@/lib/types"
 import findUser from "./findUser"
 import { revalidatePath } from "next/cache"
 

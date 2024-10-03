@@ -9,16 +9,17 @@ import {
 } from "@/components/ui/card"
 import { useEffect, useState } from "react"
 import GoalCard from "./GoalCard"
-import { Color } from "@prisma/client"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
+import getTotalTime from '@/app/actions/getTotalTime' 
 
 
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
 	const [timer, setTimer] = useState<number>(0)
+	const [ totalTime, setTotalTime] = useState<number | string>("loading")
 
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
 	const colorClasses: { [key: string]: string } = {
@@ -42,13 +43,27 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id 
 				let currentTimePassed = Math.floor((currentTime - new Date(startTime).getTime()) /1000)
 				setTimer(currentTimePassed)
 			}, 1000)
+			if(categoryId){
+			
+			getTotalTime({categoryId})
+		.then((result) => {
+			if(typeof result === 'number'){
+				console.log(totalTime)
+				setTotalTime(result)
+			}else{
+				setTotalTime('Error fetching total time')
+			}
+		})
+		.catch(() => setTotalTime('Error fetching total time'))
+			}
 		}
 		return () =>{
 			if(timerInterval){
 				clearInterval(timerInterval)
 			}
 		}	
-}, [startTime])
+}, [startTime, categoryId])
+
 
 
 	return (
@@ -58,6 +73,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, totalTime, id 
 			</CardHeader>
 			<CardContent>
 				{/*{GoalCard && (<GoalCard />)}*/}
+				{typeof totalTime === 'number' ? 
+				<p>{`${Math.floor(totalTime/60)} : ${Math.floor(totalTime % 60)}`}</p> :
+				<p>{totalTime}</p>
+}
 			</CardContent>
 
 			{status === 'idle' ? (

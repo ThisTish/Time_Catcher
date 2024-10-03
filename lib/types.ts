@@ -6,7 +6,7 @@ export interface CategoryData {
 	name: string
 	color: Color
 	userId: string
-	totalTime: number
+	totalTime?: number
 	id: string
 }
 
@@ -27,6 +27,10 @@ export interface TimeLogData {
 
 export interface TimeLogResult {
 	data?: TimeLogData
+	error?: string
+}
+export interface TimeLogResults {
+	data?: TimeLogData[]
 	error?: string
 }
 

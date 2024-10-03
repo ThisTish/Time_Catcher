@@ -1,13 +1,6 @@
 'use server'
 import { db } from "@/lib/db"
-
-
-
-interface CategoryData {
-	name: string
-	totalTime: number
-	id: string
-}
+import { CategoryData } from "@/lib/types"
 
 interface CategoryResult {
 	data?: CategoryData

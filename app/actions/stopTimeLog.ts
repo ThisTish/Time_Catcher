@@ -1,6 +1,8 @@
 'use server'
 import { db } from '@/lib/db'
-import { TimeLogData, TimeLogResult } from '@/lib/types'
+import { CategoryData, CategoryResult, TimeLogData, TimeLogResult } from '@/lib/types'
+import { Category } from '@prisma/client';
+
 
 async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | null }): Promise<TimeLogResult> {
 
@@ -17,6 +19,24 @@ async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | nu
 				}
 			})
 
+			
+
+			const timeLogCategory: CategoryData | undefined | null = await db.category.findUnique({
+				where: {
+					id: TimeLogData.categoryId
+				}
+			})
+			if(!timeLogCategory || timeLogCategory === undefined || timeLogCategory === null) return { error: 'Category for Time Log not Found'}
+			console.log(timeLogCategory)
+			
+			const newTotalTime = timeLogCategory.totalTime? + TimeLogData.timePassed
+
+
+			await db.category.update({
+				where: { id: timeLogCategory.id },
+				data: { totalTime: newTotalTime }
+			})
+		
 			return { data: TimeLogData }
 		
 		} catch (error) {

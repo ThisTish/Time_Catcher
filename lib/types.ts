@@ -11,8 +11,8 @@ export interface CategoryData {
 }
 
 export interface CategoryResult {
-	data?: CategoryData[]
-	error?: string
+	data?: CategoryData[] 
+	error?: string 
 }
 
 

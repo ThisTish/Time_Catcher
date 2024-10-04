@@ -7,19 +7,17 @@ import {
 	CardHeader,
 	CardTitle,
 } from "@/components/ui/card"
-import { useEffect, useState } from "react"
+import { useEffect, useState} from "react"
 import GoalCard from "./GoalCard"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
-import getTotalTime from '@/app/actions/getTotalTime' 
 
 
 
-const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
+const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime }) => {
 	const [timer, setTimer] = useState<number>(0)
-	const [ totalTime, setTotalTime] = useState<number | string>("loading")
 
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
 	const colorClasses: { [key: string]: string } = {
@@ -34,6 +32,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
 		WHITE: 'bg-white shadow-stone-900',
 	}
 
+	const formattedTotalTime = Math.floor(totalTime/1000)
+
 	useEffect(() =>{
 		let timerInterval: NodeJS.Timeout | null = null;
 	
@@ -43,27 +43,13 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
 				let currentTimePassed = Math.floor((currentTime - new Date(startTime).getTime()) /1000)
 				setTimer(currentTimePassed)
 			}, 1000)
-			if(categoryId){
-			
-			getTotalTime({categoryId})
-		.then((result) => {
-			if(typeof result === 'number'){
-				console.log(totalTime)
-				setTotalTime(result)
-			}else{
-				setTotalTime('Error fetching total time')
-			}
-		})
-		.catch(() => setTotalTime('Error fetching total time'))
-			}
 		}
 		return () =>{
 			if(timerInterval){
 				clearInterval(timerInterval)
 			}
 		}	
-}, [startTime, categoryId])
-
+}, [startTime])
 
 
 	return (
@@ -73,9 +59,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
 			</CardHeader>
 			<CardContent>
 				{/*{GoalCard && (<GoalCard />)}*/}
+				{/* figure out how to do hour */}
 				{typeof totalTime === 'number' ? 
-				<p>{`${Math.floor(totalTime/60)} : ${Math.floor(totalTime % 60)}`}</p> :
-				<p>{totalTime}</p>
+				<p>{`${Math.floor(formattedTotalTime/60)} min ${Math.floor(formattedTotalTime % 60)} sec`}</p> :
+				<p>Loading</p>
 }
 			</CardContent>
 
@@ -88,7 +75,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id }) => {
 					{categoryId === id ? (
 						<div className="flex flex-col text-center">
 							<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
-								{`${Math.floor(timer/60)} min ${timer % 60} sec`}
+								{`${Math.floor(timer/60)} : ${timer % 60}`}
 							</p>
 
 							<StopButton id={timeLogId} startTime={startTime} />

@@ -6,7 +6,7 @@ export interface CategoryData {
 	name: string
 	color: Color
 	userId: string
-	totalTime?: number
+	totalTime: number
 	id: string
 }
 

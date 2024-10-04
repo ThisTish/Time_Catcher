@@ -8,7 +8,7 @@ const CardSection = async () => {
 	if (error) {
 		console.log(error)
 	}
-	
+
 	return (
 		<div className="flex justify-center items-center flex-col md:flex-row flex-wrap gap-8">
 			{data?.map((category) => (

@@ -12,7 +12,6 @@ const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | nu
 
 	const handleStop: ReactEventHandler = async (event) => {
 		event.preventDefault()
-		console.log(id, status, timeLogId)
 
 		if (id !== null) {
 			try {

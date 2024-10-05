@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form"
 import addCategory from "@/app/actions/addCategory"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
-import { toast, useToast } from "@/hooks/use-toast"
+import { toast } from "@/hooks/use-toast"
 import {
 	Select,
 	SelectContent,
@@ -45,7 +45,6 @@ const AddCategoryForm = () => {
 	})
 
 	async function handleSubmitCategory(data: z.infer<typeof formSchema>) {
-		console.log(data.color)
 
 		const formData = new FormData();
 		formData.append('name', data.name);

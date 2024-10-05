@@ -11,8 +11,10 @@ import { useEffect, useState} from "react"
 import GoalCard from "./GoalCard"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
+import TotalTimeDisplay from "./TotalTimeDisplay"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
+import DeleteCategoryButton from "./DeleteCategoryButton"
 
 
 
@@ -31,14 +33,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 		BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
 		WHITE: 'bg-white shadow-stone-900',
 	}
-	const msTotalTime = totalTime/1000
-	const hours = Math.floor(msTotalTime / 3600);
-	const minutes = Math.floor((msTotalTime % 3600) / 60);
-	const seconds = Math.floor(msTotalTime % 60);
 
-	const formattedTime = hours > 0 
-	? `${hours}h ${minutes}m ${seconds}s`
-	: `${minutes}m ${seconds}s`
 
 	useEffect(() =>{
 		let timerInterval: NodeJS.Timeout | null = null;
@@ -59,17 +54,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 
 
 	return (
-		<Card className={`flex flex-col items-center shadow-inner ${colorClasses[color]} min-w-64  `}>
+		<Card className={`flex flex-col relative items-center shadow-inner ${colorClasses[color]} min-w-64  `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
+				<DeleteCategoryButton categoryName={name}/>
 			</CardHeader>
 			<CardContent>
 				{/*{GoalCard && (<GoalCard />)}*/}
-				{/* figure out how to do hour */}
-				{typeof totalTime === 'number' ? 
-				<p>{formattedTime}</p> :
-				<p>Loading</p>
-}
+				<TotalTimeDisplay totalTime={totalTime} />
+
 			</CardContent>
 
 			{status === 'idle' ? (
@@ -79,20 +72,16 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 			) : (
 				<CardFooter className="flex gap-3">
 					{categoryId === id ? (
-						<div className="flex flex-col text-center">
-							<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
-								<time>
-									{/* ? */}
-								{`${Math.floor(timer/60)} : ${timer % 60}`}
-								</time>
-								
-							</p>
+							<div className="flex flex-col text-center">
+								<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
+									{`${Math.floor(timer/60)} : ${(timer % 60).toString().padStart(2, '0')}`}
+								</p>
 
-							<StopButton id={timeLogId} startTime={startTime} />
-						</div>
-					) : (
-						<StartButton categoryId={id} disabled={true} />
-					)
+								<StopButton id={timeLogId} startTime={startTime} />
+							</div>
+						) : (
+							<StartButton categoryId={id} disabled={true} />
+						)
 					}
 				</CardFooter>
 			)

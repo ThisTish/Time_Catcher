@@ -13,7 +13,6 @@ import {
 } from "@/components/ui/alert-dialog"
 import { toast } from '@/hooks/use-toast'
 import deleteCategory from '@/app/actions/deleteCategory'
-import { revalidatePath } from 'next/cache'
 
 const DeleteCategoryButton = ({categoryName}: {categoryName: string}) => {
 

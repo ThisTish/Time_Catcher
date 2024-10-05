@@ -78,7 +78,7 @@ return (
 					<FormItem>
 						<FormLabel>Name</FormLabel>
 						<FormControl>
-							<Input placeholder="Category Name" {...field} aria-description="Enter a category name" />
+							<Input placeholder="Category Name" {...field} aria-description="Enter a category name" required/>
 						</FormControl>
 						<FormMessage />
 					</FormItem>

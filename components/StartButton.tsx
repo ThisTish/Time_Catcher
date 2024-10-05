@@ -30,11 +30,11 @@ const StartButton = ({categoryId, disabled}: {categoryId: string; disabled?: boo
 	return (
 		<Button
 			variant={"secondary"}
-			className={`text-black shadow-lg hover:shadow-none hover:scale-90 transition-transform ease-in duration-75 active:opacity-0`} 
+			className={`text-black shadow-lg text-lg hover:shadow-none hover:scale-90 transition-transform ease-in duration-75  `} 
 			onClick={handleStart}
 			disabled={disabled}
 			>
-			Start
+			START
 		</Button>
 
 	)

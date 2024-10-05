@@ -1,5 +1,4 @@
 'use server'
-import { auth, User } from "@clerk/nextjs/server"
 import { db } from "@/lib/db"
 import { Color } from "@prisma/client"
 import { CategoryData, CategoryResult } from "@/lib/types"

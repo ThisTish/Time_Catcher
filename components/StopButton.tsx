@@ -8,7 +8,7 @@ import stopTimeLog from "@/app/actions/stopTimeLog"
 
 const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | null }) => {
 
-	const { stopTimer, status, timeLogId } = useTimerContext()
+	const { stopTimer } = useTimerContext()
 
 	const handleStop: ReactEventHandler = async (event) => {
 		event.preventDefault()
@@ -36,7 +36,9 @@ const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | nu
 				onClick={handleStop}
 				data-timelog-id={id}
 				data-start-time={startTime}
-			>Stop</Button>
+			className={`shadow-lg text-lg hover:scale-125 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75 `} 
+
+			>STOP</Button>
 		</div>
 	)
 }

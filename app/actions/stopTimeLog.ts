@@ -1,6 +1,7 @@
 'use server'
 import { db } from '@/lib/db'
 import { CategoryData, CategoryResult, TimeLogData, TimeLogResult } from '@/lib/types'
+import { revalidatePath } from 'next/cache';
 
 
 async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | null }): Promise<TimeLogResult> {
@@ -37,7 +38,7 @@ async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | nu
 				totalTime: newTotalTime
 			}
 		})
-
+		revalidatePath('/')
 		return { data: TimeLogData }
 
 	} catch (error) {

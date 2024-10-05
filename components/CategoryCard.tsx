@@ -15,6 +15,10 @@ import TotalTimeDisplay from "./TotalTimeDisplay"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
 import DeleteCategoryButton from "./DeleteCategoryButton"
+import TimerDisplay from "./TimerDisplay"
+import { Timer } from "lucide-react"
+import AddGoalButton from "./AddGoalDrawer"
+import { Slider } from "@radix-ui/react-slider"
 
 
 
@@ -34,7 +38,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 		WHITE: 'bg-white shadow-stone-900',
 	}
 
-
+// to start timer
 	useEffect(() =>{
 		let timerInterval: NodeJS.Timeout | null = null;
 	
@@ -54,6 +58,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 
 
 	return (
+		//* clx to make card pop when running
 		<Card className={`flex flex-col relative items-center shadow-inner ${colorClasses[color]} min-w-64  `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
@@ -66,17 +71,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 			</CardContent>
 
 			{status === 'idle' ? (
-				<CardFooter className="flex gap-3">
+				<CardFooter className="gap-4">
+					<AddGoalButton categoryId={id} />
 					<StartButton categoryId={id} />
 				</CardFooter>
 			) : (
-				<CardFooter className="flex gap-3">
+				<CardFooter >
 					{categoryId === id ? (
-							<div className="flex flex-col text-center">
-								<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
-									{`${Math.floor(timer/60)} : ${(timer % 60).toString().padStart(2, '0')}`}
-								</p>
-
+							<div className="text-center">
+								<TimerDisplay time={timer} />
 								<StopButton id={timeLogId} startTime={startTime} />
 							</div>
 						) : (

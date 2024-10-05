@@ -31,8 +31,14 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 		BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
 		WHITE: 'bg-white shadow-stone-900',
 	}
+	const msTotalTime = totalTime/1000
+	const hours = Math.floor(msTotalTime / 3600);
+	const minutes = Math.floor((msTotalTime % 3600) / 60);
+	const seconds = Math.floor(msTotalTime % 60);
 
-	const formattedTotalTime = Math.floor(totalTime/1000)
+	const formattedTime = hours > 0 
+	? `${hours}h ${minutes}m ${seconds}s`
+	: `${minutes}m ${seconds}s`
 
 	useEffect(() =>{
 		let timerInterval: NodeJS.Timeout | null = null;
@@ -61,7 +67,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 				{/*{GoalCard && (<GoalCard />)}*/}
 				{/* figure out how to do hour */}
 				{typeof totalTime === 'number' ? 
-				<p>{`${Math.floor(formattedTotalTime/60)} min ${Math.floor(formattedTotalTime % 60)} sec`}</p> :
+				<p>{formattedTime}</p> :
 				<p>Loading</p>
 }
 			</CardContent>
@@ -75,7 +81,11 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime 
 					{categoryId === id ? (
 						<div className="flex flex-col text-center">
 							<p className="p-1 mb-3 bg-white bg-opacity-35 rounded ">
+								<time>
+									{/* ? */}
 								{`${Math.floor(timer/60)} : ${timer % 60}`}
+								</time>
+								
 							</p>
 
 							<StopButton id={timeLogId} startTime={startTime} />

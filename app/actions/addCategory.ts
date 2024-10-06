@@ -1,12 +1,12 @@
 'use server'
 import { db } from "@/lib/db"
 import { Color } from "@prisma/client"
-import { CategoryData, CategoryResult } from "@/lib/types"
+import { CategoryData, CategoryResults } from "@/lib/types"
 import findUser from "./findUser"
 import { revalidatePath } from "next/cache"
 
 
-async function addCategory(formData: FormData): Promise<CategoryResult> {
+async function addCategory(formData: FormData): Promise<CategoryResults> {
 
 	const nameValue = formData.get('name')
 	const colorValue = formData.get('color')

@@ -18,6 +18,7 @@ const CardSection = async () => {
 					name={category.name}
 					color={category.color}
 					totalTime={category.totalTime}
+					goals={category.goals}
 				/>
 			))}
 		</div>

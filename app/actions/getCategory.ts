@@ -1,11 +1,7 @@
 'use server'
 import { db } from "@/lib/db"
-import { CategoryData } from "@/lib/types"
+import { CategoryData, CategoryResult } from "@/lib/types"
 
-interface CategoryResult {
-	data?: CategoryData
-	error?: string
-}
 
 async function getCategory(id: string): Promise<CategoryResult> {
 

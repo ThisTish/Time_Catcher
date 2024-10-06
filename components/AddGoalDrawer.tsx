@@ -16,7 +16,7 @@ const AddGoalDrawer = ({categoryId}: {categoryId: string}) => {
 	return ( 
 
 		<Drawer>
-		<DrawerTrigger>Add Category</DrawerTrigger>
+		<DrawerTrigger>Add Goal</DrawerTrigger>
 		<DrawerContent className=" absolute left-3/4" data-category-id={categoryId} >
 			<DrawerHeader>
 				<div className="flex items-center justify-between w-full">
@@ -32,12 +32,6 @@ const AddGoalDrawer = ({categoryId}: {categoryId: string}) => {
 			</DrawerFooter>
 		</DrawerContent>
 	</Drawer>
-
-	// 	<Button 
-	// 	variant={'ghost'} 
-	// 	className="border-2 border-black shadow-md"
-	// 	data-category-id={categoryId}
-	// 	>Add Goal </Button>
 	)
 }
  

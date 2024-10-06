@@ -1,38 +1,30 @@
 'use server'
-import { auth } from "@clerk/nextjs/server"
 import { db } from "@/lib/db"
-import { Color } from "@prisma/client"
-import { CategoryData, CategoryResult } from "@/lib/types"
+import { CategoryResults } from "@/lib/types"
+import findUser from "./findUser"
 
-async function getCategories(): Promise<CategoryResult> {
+async function getCategories(): Promise<CategoryResults> {
 
-	const { userId } = auth()
+	const user = await findUser()
+	const userId = user.data?.id.toString()
 
 	if (!userId) {
-		return { error: 'Error with your account, please log back in to try again.' }
+		return { error: 'User login error' }
 	}
-	const user = await db.user.findUnique({
-		where: {
-			clerkUserId: userId
-		}
-	})
-	if (!user) {
-		return { error: 'Error with your account, please log back in to try again.' }
-	}
-	const { id } = user
 
 	try {
 		const categories = await db.category.findMany({
 			where: {
-				userId: id
+				userId
+			},
+			include:{
+				goals: true
 			}
 		})
-
 		return { data: categories }
 	} catch (error) {
 
 		return { error: `Error adding category, please try again. ${error}` }
-
 	}
 }
 

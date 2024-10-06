@@ -1,4 +1,4 @@
-import { Color } from "@prisma/client"
+import { Color, Goal, Period } from "@prisma/client"
 import { User } from "@prisma/client"
 import { ReactNode } from "react"
 
@@ -8,9 +8,14 @@ export interface CategoryData {
 	userId: string
 	totalTime: number
 	id: string
+	goals?: Goal[]
+}
+export interface CategoryResult {
+	data?: CategoryData
+	error?: string
 }
 
-export interface CategoryResult {
+export interface CategoryResults {
 	data?: CategoryData[] 
 	error?: string 
 }
@@ -67,4 +72,13 @@ export interface CategoryCardProps {
 	name: string
 	color: Color
 	totalTime: number
+	goals?: Goal[]
+}
+
+export interface GoalCardProps {
+	id: string
+	name?: string
+	targetTime: number
+	period: Period
+	categoryColor: string
 }

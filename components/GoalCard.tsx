@@ -6,21 +6,24 @@ import {
 	CardTitle,
 } from "@/components/ui/card"
 import GoalDropdownMenu from "./GoalDropdownMenu"
+import { GoalCardProps} from '@/lib/types'
 
 
-const GoalCard = () => {
+const GoalCard: React.FC<GoalCardProps> = ({id, name, targetTime, period, categoryColor}) => {
+
 	return (
-		<Card className=" bg-gradient-to-t to-blue-100 from-blue-300 rounded-3xl shadow-lg text-center h-40">
+		<>
+		<Card className={`rounded-2xl shadow-xl text-center h-40 text-stone-700`}>
 			<CardHeader>
-				<CardTitle>4 hours</CardTitle>
-				<CardDescription>weekly</CardDescription>
+				<CardTitle>{name}</CardTitle>
 			</CardHeader>
 			<CardContent>
-				<p>1hr 30min</p>
+				<p>{targetTime}</p>
+				<CardDescription>{period}</CardDescription>
 				<GoalDropdownMenu />
-
 			</CardContent>
 		</Card>
+		</>
 	);
 }
 

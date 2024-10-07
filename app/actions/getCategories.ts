@@ -24,7 +24,7 @@ async function getCategories(): Promise<CategoryResults> {
 		return { data: categories }
 	} catch (error) {
 
-		return { error: `Error adding category, please try again. ${error}` }
+		return { error: `Error getting categories, ${error}` }
 	}
 }
 

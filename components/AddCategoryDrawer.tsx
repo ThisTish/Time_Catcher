@@ -1,3 +1,16 @@
+'use client'
+import { useMediaQuery } from "@/hooks/use-media-query"
+import { Button } from "@/components/ui/button"
+import {
+	Dialog,
+	DialogClose,
+	DialogContent,
+	DialogDescription,
+	DialogFooter,
+	DialogHeader,
+	DialogTitle,
+	DialogTrigger,
+} from "@/components/ui/dialog"
 import {
 	Drawer,
 	DrawerClose,
@@ -8,26 +21,53 @@ import {
 	DrawerTitle,
 	DrawerTrigger,
 } from "@/components/ui/drawer"
-import { Button } from "@/components/ui/button"
 import AddCategoryForm from "./AddCategoryForm"
+import { useState } from 'react'
 import { X } from 'lucide-react'
 
 const AddCategoryDrawer = () => {
+	const [open, setOpen] = useState(false)
+	const isDesktop = useMediaQuery("(min-width: 768px)")
+
+	if (isDesktop) {
+		return (
+			<Dialog open={open} onOpenChange={setOpen}>
+				<DialogTrigger asChild>
+					<Button variant="outline">Add Category</Button>
+				</DialogTrigger>
+				<DialogContent className="sm:max-w-[425px]">
+					<DialogHeader>
+						<DialogTitle>Add a Category</DialogTitle>
+						<DialogDescription>	What would you like to catch time on?</DialogDescription>
+					</DialogHeader>
+					<AddCategoryForm />
+				<DialogFooter>
+					<DialogClose>Cancel</DialogClose>
+				</DialogFooter>
+				</DialogContent>
+			</Dialog>
+		)
+	}
+
+
+
 	return (
 		<Drawer>
-			<DrawerTrigger>Add Category</DrawerTrigger>
-			<DrawerContent className=" absolute left-3/4">
+			<DrawerTrigger asChild>
+				<Button variant='outline'>Add Category</Button>
+			</DrawerTrigger>
+			<DrawerContent>
 				<DrawerHeader>
 					<div className="flex items-center justify-between w-full">
-					<DrawerTitle>Add a Category</DrawerTitle>
-					<DrawerClose><X /></DrawerClose>
+						<DrawerTitle>Add a Category</DrawerTitle>
+						<DrawerClose><X /></DrawerClose>
 					</div>
 					<DrawerDescription>What would you like to catch time on?</DrawerDescription>
-					<AddCategoryForm />
 				</DrawerHeader>
+					<AddCategoryForm />
 				<DrawerFooter>
 					<DrawerClose>
-						<Button variant="outline">Cancel</Button>
+						Cancel
 					</DrawerClose>
 				</DrawerFooter>
 			</DrawerContent>

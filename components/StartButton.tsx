@@ -2,11 +2,12 @@ import { ReactEventHandler } from "react"
 import { Button } from "./ui/button"
 import startTimeLog from "@/app/actions/startTimeLog"
 import { useTimerContext } from "@/hooks/useTimerContext"
+import { Color } from "@prisma/client"
 
 
 
 
-const StartButton = ({categoryId, disabled}: {categoryId: string; disabled?: boolean}) => {
+const StartButton = ({categoryId, disabled, color}: {categoryId: string; disabled?: boolean; color: Color}) => {
 	const { startTimer} = useTimerContext()
 
 	const handleStart: ReactEventHandler = async (event) => {
@@ -29,8 +30,8 @@ const StartButton = ({categoryId, disabled}: {categoryId: string; disabled?: boo
 	
 	return (
 		<Button
-			variant={"secondary"}
-			className={`text-black shadow-lg text-lg hover:shadow-none hover:scale-90 transition-transform ease-in duration-75  `} 
+			// variant={"secondary"}
+			className={`shadow-lg text-lg bg-white text-${color.toLowerCase()} font-bold hover:scale-90 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75`} 
 			onClick={handleStart}
 			disabled={disabled}
 			>

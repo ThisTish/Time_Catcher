@@ -1,20 +1,26 @@
-import { Goal } from "@prisma/client"
+// 'use server'
+import { Color, Goal } from "@prisma/client"
 import GoalCard from "./GoalCard"
+import { GoalCardProps } from "@/lib/types"
+import GoalTotalTimeFetch from "./GoalTotalTimeFetch"
 
-const GoalsSection = ({ goals, categoryColor }: { goals: Goal[], categoryColor: string }) => {
+const GoalsSection: React.FC<{goals: GoalCardProps[], categoryColor: string}> = ({ goals, categoryColor })=> {
 
 	return (
-		<div className=" grid-flow-col">
-			{goals.map((goal) => (
+		<div className="flex gap-2">
+			{goals.map((goal => (
 				<GoalCard
 					key={goal.id}
-					id={goal.id}
-					name={goal.name}
-					targetTime={goal.targetTime}
-					period={goal.period}
+					{...goal}
+					// id={goal.id}
+					// name={goal.name}
+					// targetTime={goal.targetTime}
+					// period={goal.period}
+					// completed={goal.completed}
+					// categoryId={goal.categoryId}
 					categoryColor={categoryColor}
 				/>
-			))
+			)))
 
 			}
 		</div>

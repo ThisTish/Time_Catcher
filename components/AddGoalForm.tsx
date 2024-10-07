@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
@@ -27,11 +27,11 @@ import GoalTimeSlider from "./GoalTimeSlider"
 
 
 const formSchema = z.object({
-	name: z.string().min(1, {
-		message: 'Category name is required'
+	name: z.string().max(25, {
+		message: 'You only get 25 characters here!'
 	}),
 	targetTime: z.number().gt(15, {
-		message: 'Please make a time goal larger than 10min'
+		message: 'You want to make a goal less than 15 minutes?!'
 	}),
 	period: z.enum(['DAY', 'WEEK', 'MONTH', 'SEASON', 'YEAR'])
 })
@@ -64,7 +64,7 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 				variant: "destructive",
 				title: `There was a problem trying to add your goal.`,
 				description: `${result.error}`,
-				duration: 5000
+				duration: 4000
 			})
 		}
 
@@ -88,7 +88,7 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 						<FormItem>
 							<FormLabel>Name</FormLabel>
 							<FormControl>
-								<Input placeholder="Goal Name" {...field} aria-description="Enter a goal name" required />
+								<Input placeholder="Goal Name" {...field} aria-description="Enter a goal name" />
 							</FormControl>
 							<FormMessage />
 						</FormItem>

@@ -77,8 +77,10 @@ export interface CategoryCardProps {
 
 export interface GoalCardProps {
 	id: string
-	name?: string
+	name?: string | null
 	targetTime: number
 	period: Period
+	completed?: Boolean | null
+	categoryId: string
 	categoryColor: string
 }

@@ -6,7 +6,7 @@ import { revalidatePath } from "next/cache"
 import { Period } from "@prisma/client"
 
 interface GoalData {
-	name: string
+	name?: string | null
 	userId: string
 	categoryId: string
 	targetTime: number
@@ -20,15 +20,11 @@ interface GoalResult {
 
 
 async function addGoal(formData: FormData): Promise<GoalResult> {
-	const nameValue = formData.get('name')
-	if(!nameValue || nameValue === '') {
-		return { error: 'Goal name & target are required' }
-	}
-	const name: string = nameValue.toString()
+	const name = formData.get('name')?.toString()
 	
 	const targetTimeValue = Number(formData.get('targetTime'))
 	if(!targetTimeValue) return {error: "Target Time necessary"}
-	const targetTime = targetTimeValue*1000
+	const targetTime = targetTimeValue
 
 	const user = await findUser()
 	const userId = user.data?.id.toString()

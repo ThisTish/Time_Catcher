@@ -1,10 +1,18 @@
 'use server'
 import { db } from "@/lib/db"
 import { TimeLogData, TimeLogResult } from "@/lib/types"
+import findUser from "./findUser"
 
 const getTimeLog = async (): Promise<TimeLogResult> =>{
+	const user = await findUser()
+	const userId = user.data?.id.toString()
+
+	if (!userId) {
+		return { error: 'User login error' }
+	}
 	const currentTimeLog = await db.timeLog.findFirst({
 		where: {
+			userId,
 			endTime: null
 		}
 	})

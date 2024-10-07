@@ -19,22 +19,9 @@ import GoalsSection from "./GoalsSection"
 import AddGoalDrawer from "./AddGoalDrawer"
 
 
-
 const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime, goals }) => {
 	const [timer, setTimer] = useState<number>(0)
-
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
-	// const colorClasses: { [key: string]: string } = {
-	// 	BLUE: 'bg-blue-300 shadow-blue-900',
-	// 	GREEN: 'bg-green-300 shadow-green-900',
-	// 	YELLOW: 'bg-yellow-300 shadow-yellow-900',
-	// 	ORANGE: 'bg-orange-300 shadow-orange-900',
-	// 	RED: 'bg-red-300 shadow-red-900',
-	// 	PURPLE: 'bg-purple-300 shadow-purple-900',
-	// 	PINK: 'bg-pink-300 shadow-pink-900',
-	// 	BLACK: 'bg-stone-900 shadow-stone-50 text-white ',
-	// 	WHITE: 'bg-white shadow-stone-900',
-	// }
 
 	// to start timer
 	useEffect(() => {
@@ -56,25 +43,26 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 
 
 	return (
-		//* clx to make card pop when running
-		<Card className={`flex flex-col relative items-center shadow-inner bg-${color.toLowerCase()}-300 shadow-${color.toLowerCase()}-900 min-w-64  `}>
+		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-${color.toLowerCase()}-300 shadow-${color.toLowerCase()}-900 size-80  `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
+				{/* going to be options or expand button */}
 				<DeleteCategoryButton categoryName={name} />
+				<TotalTimeDisplay totalTime={totalTime} />
 			</CardHeader>
 			<CardContent>
+				
+				{/* Goals */}
 				{goals && goals.length > 0
-					? <GoalsSection goals={goals} categoryColor={`${color.toLowerCase()}`} />
-					: <AddGoalDrawer categoryId={id}/>
+					? <GoalsSection goals={goals.map(goal => ({ ...goal, categoryColor: color }))} categoryColor={`${color.toLowerCase()}`} />
+					: <AddGoalDrawer categoryId={id} />
 				}
-				{/*{GoalCard && (<GoalCard />)}*/}
-				<TotalTimeDisplay totalTime={totalTime} />
-
 			</CardContent>
 
+			{/* Start & Stop buttons respectively */}
 			{status === 'idle' ? (
 				<CardFooter >
-					<StartButton categoryId={id} />
+					<StartButton categoryId={id} color={color} />
 				</CardFooter>
 			) : (
 				<CardFooter >
@@ -83,8 +71,10 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 							<TimerDisplay time={timer} />
 							<StopButton id={timeLogId} startTime={startTime} />
 						</div>
-					) : (
-						<StartButton categoryId={id} disabled={true} />
+					) : (<>
+						<StartButton categoryId={id} disabled={true} color={color} />
+						{/* <AddGoalDrawer categoryId={id}/> */}
+					</>
 					)
 					}
 				</CardFooter>
@@ -94,4 +84,4 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 	);
 }
 
-export default CategoryCard;
+export default CategoryCard

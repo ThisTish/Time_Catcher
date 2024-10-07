@@ -4,7 +4,6 @@ import { db } from "@/lib/db"
 
 async function getTotalTime({ categoryId }: { categoryId: string }): Promise<number | null> {
 	try {
-
 		const categoryTimeLogs = await db.timeLog.findMany({
 			where: {
 				categoryId
@@ -12,12 +11,10 @@ async function getTotalTime({ categoryId }: { categoryId: string }): Promise<num
 		})
 		const totalTime = categoryTimeLogs.reduce((acc, timeLog) =>
 			acc + timeLog.timePassed, 0)
-		console.log(totalTime)
 		return totalTime
 	} catch (error) {
 		return null
 	}
-
 }
 
 export default getTotalTime

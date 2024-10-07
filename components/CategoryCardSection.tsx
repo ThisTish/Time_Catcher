@@ -3,10 +3,12 @@ import CategoryCard from "./CategoryCard"
 import getCategories from '@/app/actions/getCategories'
 
 
-const CardSection = async () => {
+const CategoryCardSection = async () => {
 	const { data, error } = await getCategories()
 	if (error) {
 		console.log(error)
+		// toast?
+		return null
 	}
 
 	return (
@@ -26,4 +28,4 @@ const CardSection = async () => {
 
 }
 
-export default CardSection;
+export default CategoryCardSection

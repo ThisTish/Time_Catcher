@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 import { zodResolver } from "@hookform/resolvers/zod"
 import { z } from "zod"
 import { useForm } from "react-hook-form"
@@ -24,6 +24,7 @@ import {
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form"
+import { revalidatePath } from "next/cache"
 
 
 const formSchema = z.object({
@@ -64,6 +65,7 @@ const AddCategoryForm = () => {
 				duration: 4000
 			})
 			form.reset()
+			//? need to figure out how to close dialog/drawer. pass back up?
 }
 	}
 

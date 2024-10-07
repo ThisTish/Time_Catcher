@@ -1,11 +1,10 @@
 import { Timer } from "lucide-react"
+import { timeFormat } from "@/lib/utils"
 
 
 const TimerDisplay = ({time}: {time: number}) => {
-
-	const hours = Math.floor(time / 3600)
-	const minutes = Math.floor((time % 3600) / 60)
-	const seconds = Math.floor(time % 60)
+	const { hours, minutes, seconds } = timeFormat(time)
+	
 	
 	const formattedTime = hours > 0 
 	? `${hours} : ${(minutes.toString().padStart(2,'0'))} : ${(seconds).toString().padStart(2, '0')}`

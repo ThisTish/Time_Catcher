@@ -1,4 +1,4 @@
-'use client'
+// 'use client'
 
 import { Button } from "./ui/button"
 import { ReactEventHandler } from "react"
@@ -36,7 +36,8 @@ const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | nu
 				onClick={handleStop}
 				data-timelog-id={id}
 				data-start-time={startTime}
-			className={`shadow-lg text-lg hover:scale-125 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75 `} 
+				// make a varient with these classes...except for the scale
+			className={`shadow-lg text-lg hover:scale-125 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75`} 
 
 			>STOP</Button>
 		</div>

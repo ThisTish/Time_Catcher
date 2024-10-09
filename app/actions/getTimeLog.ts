@@ -4,15 +4,15 @@ import { TimeLogData, TimeLogResult } from "@/lib/types"
 import findUser from "./findUser"
 
 const getTimeLog = async (): Promise<TimeLogResult> =>{
-	const user = await findUser()
-	const userId = user.data?.id.toString()
+	// const user = await findUser()
+	// const userId = user.data?.id.toString()
 
-	if (!userId) {
-		return { error: 'User login error' }
-	}
+	// if (!userId) {
+	// 	return { error: 'User login error' }
+	// }
 	const currentTimeLog = await db.timeLog.findFirst({
 		where: {
-			userId,
+			// userId,
 			endTime: null
 		}
 	})

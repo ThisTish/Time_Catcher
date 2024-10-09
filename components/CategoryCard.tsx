@@ -10,12 +10,12 @@ import {
 import { useEffect, useState } from "react"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
-import TotalTimeDisplay from "./TotalTimeDisplay"
+// import TotalTimeDisplay from "./TotalTimeDisplay"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
 import DeleteCategoryButton from "./DeleteCategoryButton"
 import TimerDisplay from "./TimerDisplay"
-import GoalsSection from "./GoalsSection"
+// import GoalsSection from "./GoalsSection"
 import AddGoalDrawer from "./AddGoalDrawer"
 
 
@@ -48,15 +48,15 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 				<CardTitle>{name}</CardTitle>
 				{/* going to be options or expand button */}
 				<DeleteCategoryButton categoryName={name} />
-				<TotalTimeDisplay totalTime={totalTime} />
+				{/* <TotalTimeDisplay totalTime={totalTime} /> */}
 			</CardHeader>
 			<CardContent>
 				
 				{/* Goals */}
-				{goals && goals.length > 0
+				{/* {goals && goals.length > 0
 					? <GoalsSection goals={goals.map(goal => ({ ...goal, categoryColor: color }))} categoryColor={`${color.toLowerCase()}`} />
 					: <AddGoalDrawer categoryId={id} />
-				}
+				} */}
 			</CardContent>
 
 			{/* Start & Stop buttons respectively */}

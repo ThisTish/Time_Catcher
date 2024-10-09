@@ -2,13 +2,15 @@
 import { GoalCardProps } from '@/lib/types'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import GoalDropdownMenu from './GoalDropdownMenu'
-import DeleteGoalButton from './DeleteGoalButton'
+import { timeFormat } from '@/lib/utils'
 
 const GoalCard: React.FC<GoalCardProps> = ({ id, name, targetTime, period, completed, categoryId }) => {
 
+	
 	// Formatting for Goal Target Time
-	const targetHours = Math.floor(targetTime / 60)
-	const targetMinutes = targetTime % 60
+	const targetTimeMs = targetTime / 1000
+	const targetHours = timeFormat(targetTimeMs).hours
+	const targetMinutes = timeFormat(targetTimeMs).minutes
 
 	return (
 		<Card className={`bg-slate-100 bg-opacity-45 shadow-sm from-10% text-stone-700 relative`}>

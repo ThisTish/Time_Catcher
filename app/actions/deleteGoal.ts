@@ -3,21 +3,21 @@ import { db } from "@/lib/db"
 import { revalidatePath } from "next/cache"
 
 
-const deleteCategory = async ({ categoryId }: { categoryId: string }) => {
+const deleteGoal = async ({ goalId }: { goalId: string }) => {
 
 	try {
-		const deletedCategory = await db.category.delete({
+		const deletedGoal = await db.goal.delete({
 			where: {
-				id: categoryId
+				id: goalId
 			}
 		})
 
 		revalidatePath('/')
-		return { data: deletedCategory}
+		return { data: deletedGoal}
 
 	} catch (error) {
 		return { error: `There has been an error: ${error}` }
 	}
 }
 
-export default deleteCategory
+export default deleteGoal

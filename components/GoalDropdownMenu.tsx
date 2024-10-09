@@ -6,8 +6,9 @@ import {
 	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import DeleteGoalButton from "./DeleteGoalButton"
 
-const GoalDropdownMenu = () => {
+const GoalDropdownMenu = ({goalId}: {goalId: string}) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger>...</DropdownMenuTrigger>
@@ -15,7 +16,9 @@ const GoalDropdownMenu = () => {
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem>Edit</DropdownMenuItem>
-				<DropdownMenuItem>Delete</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<DeleteGoalButton goalId={goalId} />
+				</DropdownMenuItem>
 				<DropdownMenuItem>Mark Completed</DropdownMenuItem>
 				<DropdownMenuItem>Add Time</DropdownMenuItem>
 			</DropdownMenuContent>

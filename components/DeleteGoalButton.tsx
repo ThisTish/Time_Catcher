@@ -12,12 +12,12 @@ import {
 	AlertDialogTrigger,
 } from "@/components/ui/alert-dialog"
 import { toast } from '@/hooks/use-toast'
-import deleteCategory from '@/app/actions/deleteCategory'
+import deleteGoal from '@/app/actions/deleteGoal'
 
-const DeleteCategoryButton = ({categoryId, categoryName}: {categoryId: string, categoryName: string}) => {
+const DeleteGoalButton= ({goalId}: {goalId: string}) => {
 
 	const handleDelete = async () =>{
-		const result = await deleteCategory({categoryId})
+		const result = await deleteGoal({goalId})
 		if(result.error){
 			console.log(result.error)
 			toast({
@@ -29,7 +29,7 @@ const DeleteCategoryButton = ({categoryId, categoryName}: {categoryId: string, c
 
 		if(result.data){
 		toast({
-			description: `Category ${name} deleted successfully!`,
+			description: `Goal deleted successfully!`,
 			duration: 4000
 		})
 
@@ -39,16 +39,14 @@ const DeleteCategoryButton = ({categoryId, categoryName}: {categoryId: string, c
 	return (
 
 		<AlertDialog >
-			<AlertDialogTrigger asChild>
-				<button>
-					<XIcon className="absolute top-3 right-3 size-4" />
-				</button>
+			<AlertDialogTrigger>
+				Delete
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Delete {categoryName}???</AlertDialogTitle>
+					<AlertDialogTitle>Delete this Goal???</AlertDialogTitle>
 					<AlertDialogDescription>
-						All info will be removed for this category!
+						All info will be removed for this goal!
 					</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
@@ -61,4 +59,4 @@ const DeleteCategoryButton = ({categoryId, categoryName}: {categoryId: string, c
 	)
 }
 
-export default DeleteCategoryButton;
+export default DeleteGoalButton

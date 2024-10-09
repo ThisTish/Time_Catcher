@@ -112,7 +112,7 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 											<SelectItem value="DAY">Day</SelectItem>
 											<SelectItem value="WEEK">Week</SelectItem>
 											<SelectItem value="MONTH">Month</SelectItem>
-											<SelectItem value="SEASON">Season</SelectItem>
+											<SelectItem value="SEASON" disabled>Season</SelectItem>
 											<SelectItem value="YEAR">Year</SelectItem>
 											{/* <SelectItem value="other">other?</SelectItem> adds an input for a date */}0
 										</SelectGroup>

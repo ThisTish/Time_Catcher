@@ -22,6 +22,7 @@ import AddGoalDrawer from "./AddGoalDrawer"
 const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime, goals }) => {
 	const [timer, setTimer] = useState<number>(0)
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
+	
 	// to start timer
 	useEffect(() => {
 		let timerInterval: NodeJS.Timeout | null = null;
@@ -46,7 +47,7 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				{/* going to be options or expand button */}
-				<DeleteCategoryButton categoryName={name} />
+				<DeleteCategoryButton categoryId={id} categoryName={name} />
 				<TotalTimeDisplay totalTime={totalTime} />
 			</CardHeader>
 			<CardContent>
@@ -62,6 +63,8 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 			{status === 'idle' ? (
 				<CardFooter >
 					<StartButton categoryId={id} color={color} />
+					<AddGoalDrawer categoryId={id}/>
+
 				</CardFooter>
 			) : (
 				<CardFooter >

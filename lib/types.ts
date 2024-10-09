@@ -3,12 +3,14 @@ import { User } from "@prisma/client"
 import { ReactNode } from "react"
 
 export interface CategoryData {
+	id: string
 	name: string
 	color: Color
-	userId: string
 	totalTime: number
-	id: string
 	goals?: Goal[]
+	totalTimeByDay?: number | null
+	totalTimeByWeek?: number | null
+	totalTimeByMonth?: number | null
 }
 export interface CategoryResult {
 	data?: CategoryData
@@ -61,13 +63,16 @@ export interface TimerProviderProps {
 
 }
 
-export interface CategoryCardProps {
-	id: string
-	name: string
-	color: Color
-	totalTime: number
-	goals?: Goal[]
-}
+// export interface CategoryCardProps {
+// 	id: string
+// 	name: string
+// 	color: Color
+// 	totalTime: number
+// 	goals?: Goal[]
+// 	totalTimeByDay?: number | null
+// 	totalTimeByWeek?: number | null
+// 	totalTimeByMonth?: number  | null
+// }
 
 export interface GoalCardProps {
 	id: string
@@ -76,4 +81,7 @@ export interface GoalCardProps {
 	period: Period
 	completed?: Boolean | null
 	categoryId: string
+	totalTimeByDay?: number | null
+	totalTimeByWeek?: number | null
+	totalTimeByMonth?: number | null
 }

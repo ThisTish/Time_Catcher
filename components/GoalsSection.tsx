@@ -1,17 +1,11 @@
-// 'use server'
 import { Color, Goal } from "@prisma/client"
 import GoalCard from "./GoalCard"
 import { GoalCardProps } from "@/lib/types"
-// import GoalTotalTimeFetch from "./GoalTotalTimeFetch"
 
-const GoalsSection: React.FC<{goals: GoalCardProps[]}> = ({ goals })=> {
+const GoalsSection: React.FC<{goals: GoalCardProps[], totalTimeByDay: number | null, totalTimeByWeek: number | null, totalTimeByMonth: number | null}> = ({ goals, totalTimeByDay, totalTimeByWeek, totalTimeByMonth})=> {
 
 	return (
-		<div className="flex gap-2">
-			<h1>Goals!</h1>
-			{/* {goals.map((goal) => 
-				<p key={goal.id}>{goal.name}</p>
-			)} */}
+		<div >
 			{goals.map((goal => (
 				<GoalCard
 					key={goal.id}
@@ -21,6 +15,9 @@ const GoalsSection: React.FC<{goals: GoalCardProps[]}> = ({ goals })=> {
 					period={goal.period}
 					completed={goal.completed}
 					categoryId={goal.categoryId}
+					totalTimeByDay = {totalTimeByDay}
+					totalTimeByWeek = {totalTimeByWeek}
+					totalTimeByMonth = {totalTimeByMonth}
 				/>
 			)))
 			}

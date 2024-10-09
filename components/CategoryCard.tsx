@@ -10,19 +10,18 @@ import {
 import { useEffect, useState } from "react"
 import StartButton from "./StartButton"
 import StopButton from "./StopButton"
-// import TotalTimeDisplay from "./TotalTimeDisplay"
+import TotalTimeDisplay from "./TotalTimeDisplay"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryCardProps } from "@/lib/types"
 import DeleteCategoryButton from "./DeleteCategoryButton"
 import TimerDisplay from "./TimerDisplay"
-// import GoalsSection from "./GoalsSection"
+import GoalsSection from "./GoalsSection"
 import AddGoalDrawer from "./AddGoalDrawer"
 
 
 const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime, goals }) => {
 	const [timer, setTimer] = useState<number>(0)
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
-
 	// to start timer
 	useEffect(() => {
 		let timerInterval: NodeJS.Timeout | null = null;
@@ -43,20 +42,20 @@ const CategoryCard: React.FC<CategoryCardProps> = ({ name, color, id, totalTime,
 
 
 	return (
-		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-${color.toLowerCase()}-300 shadow-${color.toLowerCase()}-900 size-80  `}>
+		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-${color}-300 shadow-${color}-900 size-80  `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				{/* going to be options or expand button */}
 				<DeleteCategoryButton categoryName={name} />
-				{/* <TotalTimeDisplay totalTime={totalTime} /> */}
+				<TotalTimeDisplay totalTime={totalTime} />
 			</CardHeader>
 			<CardContent>
 				
 				{/* Goals */}
-				{/* {goals && goals.length > 0
-					? <GoalsSection goals={goals.map(goal => ({ ...goal, categoryColor: color }))} categoryColor={`${color.toLowerCase()}`} />
+				{goals && goals.length > 0
+					? <GoalsSection goals={goals} />
 					: <AddGoalDrawer categoryId={id} />
-				} */}
+				}
 			</CardContent>
 
 			{/* Start & Stop buttons respectively */}

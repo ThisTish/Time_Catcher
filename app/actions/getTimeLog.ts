@@ -1,75 +1,75 @@
-'use server'
-import { db } from "@/lib/db"
-import { TimeLogData, TimeLogResult } from "@/lib/types"
-import findUser from "./findUser"
+// 'use server'
+// import { db } from "@/lib/db"
+// import { TimeLogData, TimeLogResult } from "@/lib/types"
+// import findUser from "./findUser"
 
-const getTimeLog = async (): Promise<TimeLogResult> =>{
-	// const user = await findUser()
-	// const userId = user.data?.id.toString()
+// const getTimeLog = async (): Promise<TimeLogResult> =>{
+// 	const user = await findUser()
+// 	const userId = user.data?.id.toString()
 
-	// if (!userId) {
-	// 	return { error: 'User login error' }
-	// }
-	const currentTimeLog = await db.timeLog.findFirst({
-		where: {
-			// userId,
-			endTime: null
-		}
-	})
-	if (!currentTimeLog) {
-		return { error: 'No current time log found' }
-	}
-	return { data: currentTimeLog }
-}
+// 	if (!userId) {
+// 		return { error: 'User login error' }
+// 	}
+// 	const currentTimeLog = await db.timeLog.findFirst({
+// 		where: {
+// 			// userId,
+// 			endTime: null
+// 		}
+// 	})
+// 	if (!currentTimeLog) {
+// 		return { error: 'No current time log found' }
+// 	}
+// 	return { data: currentTimeLog }
+// }
 
-export default getTimeLog
-
-
+// export default getTimeLog
 
 
 
 
 
-// // get timelog by id...
-// // 'use server'
-// // import { db } from "@/lib/db"
-// // import { TimeLogData } from "@/lib/types"
-// // import { TimeLogResult } from "@/lib/types"
 
 
-// // async function getTimeLog({ userId, categoryId, startTime, id }: TimeLogData): Promise<TimeLogResult> {
+// // // get timelog by id...
+// // // 'use server'
+// // // import { db } from "@/lib/db"
+// // // import { TimeLogData } from "@/lib/types"
+// // // import { TimeLogResult } from "@/lib/types"
 
-// // 	try {
-// // 		console.log('trying to find timelog')
-// // 		if (startTime === undefined) {
-// // 			return { error: 'Issue with start time for timelog' }
-// // 		}
 
-// // 		const timeLog = await db.timeLog.findUnique({
-// // 			where: {
-// // 				id		
-// // 			}
-// // 		})
-// // 		console.log(JSON.stringify(timeLog))
-// // 		if (!timeLog) {
-// // 			return { error: 'Error happened trying to find that timeLog' }
-// // 		}
+// // // async function getTimeLog({ userId, categoryId, startTime, id }: TimeLogData): Promise<TimeLogResult> {
 
-// // 		return {
-// // 			data: {
+// // // 	try {
+// // // 		console.log('trying to find timelog')
+// // // 		if (startTime === undefined) {
+// // // 			return { error: 'Issue with start time for timelog' }
+// // // 		}
 
-// // 				id: timeLog.id,
-// // 				userId: timeLog.userId,
-// // 				categoryId: timeLog.categoryId,
-// // 				startTime: timeLog.startTime,
-// // 				timePassed: timeLog.timePassed,
-// // 			}
-// // 		}
-// // 	} catch (error) {
+// // // 		const timeLog = await db.timeLog.findUnique({
+// // // 			where: {
+// // // 				id		
+// // // 			}
+// // // 		})
+// // // 		console.log(JSON.stringify(timeLog))
+// // // 		if (!timeLog) {
+// // // 			return { error: 'Error happened trying to find that timeLog' }
+// // // 		}
 
-// // 		return { error: `Error finding category, please try again. ${error}` }
+// // // 		return {
+// // // 			data: {
 
-// // 	}
-// // }
+// // // 				id: timeLog.id,
+// // // 				userId: timeLog.userId,
+// // // 				categoryId: timeLog.categoryId,
+// // // 				startTime: timeLog.startTime,
+// // // 				timePassed: timeLog.timePassed,
+// // // 			}
+// // // 		}
+// // // 	} catch (error) {
 
-// // export default getTimeLog
+// // // 		return { error: `Error finding category, please try again. ${error}` }
+
+// // // 	}
+// // // }
+
+// // // export default getTimeLog

@@ -6,8 +6,7 @@ import { Toaster } from '@/components/ui/toaster'
 import NavBar from "@/components/NavBar"
 import Footer from '@/components/Footer'
 import { TimerProvider } from "@/hooks/useTimerContext"
-import getTimeLog from "./actions/getTimeLog"
-
+import getCurrentTimer from "./actions/getCurrentTimer"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -31,26 +30,15 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-
-  const getCurrentTimer = async () => {
-    const { data, error } = await getTimeLog()
-    if (data) {
-      const currentTimer = {
-        id: data.id,
-        userId: data.userId,
-        categoryId: data.categoryId,
-        startTime: data.startTime,
-        endTime: data.endTime,
-        timePassed: data.timePassed
-      }
-      return currentTimer
-    }
-  }
   const currentTimerContext = await getCurrentTimer()
+  let currentTimerData
+  if(currentTimerContext){
+    currentTimerData = currentTimerContext.data
+  }
 
   return (
     <ClerkProvider>
-      <TimerProvider ongoingTimer={currentTimerContext || null}>
+      <TimerProvider ongoingTimer={currentTimerData || null}>
         <html lang="en">
           <body
             className={`${geistSans.variable} ${geistMono.variable} antialiased`}

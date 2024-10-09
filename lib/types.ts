@@ -28,6 +28,7 @@ export interface TimeLogData {
 	startTime: Date | null
 	endTime: Date | null
 	timePassed: number
+	status?: 'idle' | 'running'
 }
 
 export interface TimeLogResult {
@@ -56,14 +57,7 @@ export interface TimerContextProps {
 
 export interface TimerProviderProps {
 	children: ReactNode
-	ongoingTimer: {
-		id: string
-		userId: string
-		categoryId: string
-		startTime: Date | null
-		endTime: Date | null
-		timePassed: number 
-	} | null
+	ongoingTimer: TimeLogData | null
 
 }
 
@@ -82,5 +76,4 @@ export interface GoalCardProps {
 	period: Period
 	completed?: Boolean | null
 	categoryId: string
-	categoryColor: string
 }

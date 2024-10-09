@@ -7,7 +7,6 @@ const CategoryCardSection = async () => {
 	const { data, error } = await getCategories()
 	if (error) {
 		console.log(error)
-		// toast?
 		return null
 	}
 

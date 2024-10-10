@@ -3,33 +3,57 @@ import { db } from "@/lib/db"
 import getTotalTimeByPeriod from "@/app/actions/getTotalTimeByPeriod"
 import { timeFormat } from "@/lib/utils"
 
-// interface TimeToMeetGoalDisplayProps {
-// 	categoryId: string
-// 	targetTime: number
-// 	period: Period
-// }
+interface TimeToMeetGoalDisplayProps {
+	targetTime: number
+	period: Period
+	totalTimeByDay: number | null
+	totalTimeByWeek: number | null
+	totalTimeByMonth: number | null
+}
 
-const TimeToMeetGoalDisplay: React.FC<{targetTime: number, totalTimeByDay: number | null, totalTimeByWeek: number | null, totalTimeByMonth: number | null}> = ({targetTime, totalTimeByDay, totalTimeByWeek, totalTimeByMonth})  => {
+const TimeToMeetGoalDisplay: React.FC<TimeToMeetGoalDisplayProps>= ({targetTime, period, totalTimeByDay, totalTimeByWeek, totalTimeByMonth})  => {
 
 	if(!totalTimeByDay || !totalTimeByWeek || !totalTimeByMonth) return null
-	const timeToGoForDay = Math.floor(targetTime - totalTimeByDay) / 1000
-	const timeToGoForWeek = Math.floor(targetTime - totalTimeByDay) / 1000
-	const timeToGoForMonth = Math.floor(targetTime - totalTimeByDay) / 1000
-	const dayHours = timeFormat(timeToGoForDay).hours
-	const dayMinutes = timeFormat(timeToGoForDay).minutes
-	const weekHours = timeFormat(timeToGoForWeek).hours
-	const weekMinutes = timeFormat(timeToGoForWeek).minutes
-	const monthHours = timeFormat(timeToGoForMonth).hours
-	const monthMinutes = timeFormat(timeToGoForMonth).minutes
+	// const timeToGoForDay = Math.floor(targetTime - totalTimeByDay) / 1000
+	// const timeToGoForWeek = Math.floor(targetTime - totalTimeByDay) / 1000
+	// const timeToGoForMonth = Math.floor(targetTime - totalTimeByDay) / 1000
+	// const dayHours = timeFormat(timeToGoForDay).hours
+	// const dayMinutes = timeFormat(timeToGoForDay).minutes
+	// const weekHours = timeFormat(timeToGoForWeek).hours
+	// const weekMinutes = timeFormat(timeToGoForWeek).minutes
+	// const monthHours = timeFormat(timeToGoForMonth).hours
+	// const monthMinutes = timeFormat(timeToGoForMonth).minutes
+
+// work on year. and eventually season
+	const getTotalTime = () =>{
+		switch(period){
+			case 'DAY':
+				return totalTimeByDay
+			case 'WEEK':
+				return totalTimeByWeek
+			case 'MONTH':
+				return totalTimeByMonth
+			default:
+					return null
+		}
+	}
+
+	const totalTime = getTotalTime()
+	if(totalTime === null) return null
+
+
+	const timeToGo = Math.floor(targetTime - totalTime) / 1000
+	const { hours, minutes } = timeFormat(timeToGo)
+// ok, now need to hone in this and clean it all up a bit. 
+
 
 	return (
+
+
 		<>
 		<h1>hours & minutes</h1>
 
-		<p>{dayHours}h {dayMinutes}m </p>
-		<p>{weekHours}h {weekMinutes}m </p>
-		<p>{monthHours}h {monthMinutes}m </p>
-			{/* <p>{hours}! {minutes}!</p> */}
+		<p>{hours}h {minutes}m </p>
 		</>
 	);
 }

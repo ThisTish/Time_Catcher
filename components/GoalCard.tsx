@@ -22,7 +22,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ id, name, targetTime, period, compl
 			) : null}
 			<CardContent>
 				<p>{targetHours}h {targetMinutes}m/ {period}</p>
-				<TimeToMeetGoalDisplay targetTime={targetTime} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>
+				<TimeToMeetGoalDisplay period={period} targetTime={targetTime} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>
 				<GoalDropdownMenu goalId={id}/>
 
 			</CardContent>

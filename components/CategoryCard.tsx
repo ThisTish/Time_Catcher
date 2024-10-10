@@ -43,7 +43,7 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 
 
 	return (
-		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-stone-300 size-80 m-10 `}>
+		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-stone-300 `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				{/* going to be options or expand button */}

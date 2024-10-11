@@ -39,10 +39,8 @@ const DeleteCategoryButton = ({categoryId, categoryName}: {categoryId: string, c
 	return (
 
 		<AlertDialog >
-			<AlertDialogTrigger asChild>
-				<button>
-					<XIcon className="absolute top-3 right-3 size-4" />
-				</button>
+			<AlertDialogTrigger>
+				Delete
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>

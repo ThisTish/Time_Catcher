@@ -26,7 +26,7 @@ async function stopTimeLog({ id, startTime }: { id: string; startTime: Date | nu
 		})
 
 		if (!timeLogCategory || timeLogCategory === null) return { error: 'Category for Time Log not Found' }
-		console.log(timeLogCategory)
+		// console.log(timeLogCategory)
 
 		const newTotalTime = timeLogCategory.totalTime + TimeLogData.timePassed
 

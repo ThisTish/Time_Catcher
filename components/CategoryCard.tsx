@@ -13,7 +13,8 @@ import StopButton from "./StopButton"
 import TotalTimeDisplay from "./TotalTimeDisplay"
 import { useTimerContext } from "@/hooks/useTimerContext"
 import { CategoryData } from "@/lib/types"
-import DeleteCategoryButton from "./DeleteCategoryButton"
+// import DeleteCategoryButton from "./DeleteCategoryButton"
+import CategoryDropDownMenu from './CategoryDropDownMenu'
 import TimerDisplay from "./TimerDisplay"
 import GoalsSection from "./GoalsSection"
 import AddGoalDrawer from "./AddGoalDrawer"
@@ -47,7 +48,8 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
 				{/* going to be options or expand button */}
-				<DeleteCategoryButton categoryId={id} categoryName={name} />
+				{/* <DeleteCategoryButton categoryId={id} categoryName={name} /> */}
+				<CategoryDropDownMenu categoryId={id} categoryName={name} />
 				<TotalTimeDisplay totalTime={totalTime} />
 			</CardHeader>
 			<CardContent>

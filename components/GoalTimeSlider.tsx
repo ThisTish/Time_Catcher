@@ -20,11 +20,11 @@ const GoalTimeSlider: React.FC<GoalTimeSliderProps> = ({ value, onChange }) => {
 	useEffect(() =>{
 		setTime(value)
 	}, [value])
-	console.log(time)
+	// console.log(time)
 	const hours = Math.floor(time / 60)
 	const minutes = time % 60
 
-	console.log(`hours ${hours} minutes: ${minutes}`)
+	// console.log(`hours ${hours} minutes: ${minutes}`)
 	return (
 		<>
 				<DualRangeSlider

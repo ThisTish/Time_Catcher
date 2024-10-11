@@ -12,7 +12,7 @@ async function getCategory(id: string): Promise<CategoryResult> {
 				id: id
 			}
 		})
-console.log(JSON.stringify(category))
+// console.log(JSON.stringify(category))
 		if (!category) {
 			return { error: 'Error happened trying to find that category' }
 		}

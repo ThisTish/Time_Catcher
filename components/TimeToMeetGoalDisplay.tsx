@@ -41,8 +41,10 @@ const TimeToMeetGoalDisplay: React.FC<TimeToMeetGoalDisplayProps>= ({targetTime,
 	const totalTime = getTotalTime()
 	if(totalTime === null) return null
 
+	// if time to go is negative(one, it's not showing?) two, mark goal as completed.
 
 	const timeToGo = Math.floor(targetTime - totalTime) / 1000
+	// console.log(timeToGo)
 	const { hours, minutes } = timeFormat(timeToGo)
 // ok, now need to hone in this and clean it all up a bit. 
 

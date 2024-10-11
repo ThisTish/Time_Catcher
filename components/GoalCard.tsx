@@ -14,12 +14,12 @@ const GoalCard: React.FC<GoalCardProps> = ({ id, name, targetTime, period, compl
 	const targetMinutes = timeFormat(targetTimeMs).minutes
 
 	return (
-		<Card className={`bg-gradient-to-r from-slate-100 to-slate-400 to-55% bg-opacity-55 shadow-md text-stone-700  h-44`}>
-			{name ? (
+		<Card className={`bg-gradient-to-t from-slate-100 to-slate-400 to-95% bg-opacity-55 shadow-md text-stone-700 h-44`}>
+			
 				<CardHeader>
 					<CardTitle>{name}</CardTitle>
 				</CardHeader>
-			) : null}
+			
 			<CardContent>
 				<p>{targetHours}h {targetMinutes}m/ {period}</p>
 				<TimeToMeetGoalDisplay period={period} targetTime={targetTime} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>

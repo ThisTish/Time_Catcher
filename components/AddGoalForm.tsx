@@ -57,7 +57,7 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 		formData.append('targetTime', stringTargetTimeMs)
 		formData.append('categoryId', categoryId)
 		formData.append('period', data.period)
-		console.log(stringTargetTimeMs)
+		// console.log(stringTargetTimeMs)
 		const result = await addGoal(formData);
 		if (result.error) {
 			toast({

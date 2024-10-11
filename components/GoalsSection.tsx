@@ -1,11 +1,10 @@
-import { Color, Goal } from "@prisma/client"
 import GoalCard from "./GoalCard"
 import { GoalCardProps } from "@/lib/types"
 
 const GoalsSection: React.FC<{goals: GoalCardProps[], totalTimeByDay: number | null, totalTimeByWeek: number | null, totalTimeByMonth: number | null}> = ({ goals, totalTimeByDay, totalTimeByWeek, totalTimeByMonth})=> {
 
 	return (
-		<div >
+		<div>
 			{goals.map((goal => (
 				<GoalCard
 					key={goal.id}

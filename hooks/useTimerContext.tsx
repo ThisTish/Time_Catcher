@@ -31,7 +31,7 @@ export const TimerProvider: FC<TimerProviderProps> = ({ children, ongoingTimer }
 		setStartTime(ongoingTimer.startTime)
 		setTimePassed(ongoingTimer.timePassed)
 		}
-		console.log('ongoingTimer?.id',ongoingTimer?.id)
+		// console.log('ongoingTimer?.id',ongoingTimer?.id)
 	},[ongoingTimer])
 
 

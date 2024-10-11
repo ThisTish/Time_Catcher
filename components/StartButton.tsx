@@ -20,7 +20,7 @@ const StartButton = ({categoryId, disabled, color}: {categoryId: string; disable
 			}
 			if(result.data){
 				const timeLogId = result.data.id
-				console.log('starting with timelog and category id',timeLogId, categoryId)
+				// console.log('starting with timelog and category id',timeLogId, categoryId)
 				startTimer(timeLogId, categoryId)
 			}
 		}catch(error){

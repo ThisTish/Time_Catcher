@@ -24,7 +24,8 @@ import { X } from 'lucide-react'
 import AddGoalForm from "./AddGoalForm"
 import { useState } from 'react'
 
-const AddGoalDrawer = ({ categoryId }: { categoryId: string }) => {
+const AddGoalDrawer
+ = ({ categoryId }: { categoryId: string }) => {
 	const [open, setOpen] = useState(false)
 	const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -75,3 +76,4 @@ const AddGoalDrawer = ({ categoryId }: { categoryId: string }) => {
 }
 
 export default AddGoalDrawer
+

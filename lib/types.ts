@@ -6,7 +6,7 @@ export interface CategoryData {
 	id: string
 	name: string
 	color: Color
-	totalTime: number
+	totalTime?: number
 	goals?: Goal[]
 	totalTimeByDay?: number | null
 	totalTimeByWeek?: number | null

@@ -7,15 +7,18 @@ import {
 	DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import DeleteCategoryButton from "./DeleteCategoryButton"
+import CategoryDrawer from "./CategoryDrawer"
 
-const GoalDropdownMenu = ({categoryId, categoryName}: {categoryId: string, categoryName: string}) => {
+const CategoryDropDown = ({categoryId, categoryName}: {categoryId: string, categoryName: string}) => {
 	return (
 		<DropdownMenu >
 			<DropdownMenuTrigger>...</DropdownMenuTrigger>
 			<DropdownMenuContent>
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuSeparator />
-				<DropdownMenuItem>Edit</DropdownMenuItem>
+				<DropdownMenuItem asChild>
+					<CategoryDrawer status={"edit"}/>
+				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<DeleteCategoryButton categoryId={categoryId} categoryName={categoryName} />
 				</DropdownMenuItem>
@@ -27,4 +30,4 @@ const GoalDropdownMenu = ({categoryId, categoryName}: {categoryId: string, categ
 	);
 }
 
-export default GoalDropdownMenu
+export default CategoryDropDown

@@ -17,12 +17,14 @@ import { CategoryData } from "@/lib/types"
 import CategoryDropDownMenu from './CategoryDropDownMenu'
 import TimerDisplay from "./TimerDisplay"
 import GoalsSection from "./GoalsSection"
-import AddGoalDrawer from "./AddGoalDrawer"
+import CategoryDrawer from "./CategoryDrawer"
+import AddGoalDrawer from './AddGoalDrawer'
 
 
 const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goals, totalTimeByDay, totalTimeByWeek, totalTimeByMonth }) => {
 	const [timer, setTimer] = useState<number>(0)
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
+	// useState for card expanded or not
 	
 	// to start timer
 	useEffect(() => {
@@ -47,10 +49,9 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-stone-300 `}>
 			<CardHeader>
 				<CardTitle>{name}</CardTitle>
-				{/* going to be options or expand button */}
 				{/* <DeleteCategoryButton categoryId={id} categoryName={name} /> */}
-				<CategoryDropDownMenu categoryId={id} categoryName={name} />
-				<TotalTimeDisplay totalTime={totalTime} />
+				<CategoryDropDownMenu categoryId={id} categoryName={name}/>
+				<TotalTimeDisplay totalTime={totalTime ?? 0} />
 			</CardHeader>
 			<CardContent>
 				

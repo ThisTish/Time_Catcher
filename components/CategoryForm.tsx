@@ -6,6 +6,7 @@ import addCategory from "@/app/actions/addCategory"
 import { Button } from "./ui/button"
 import { Input } from "./ui/input"
 import { toast } from "@/hooks/use-toast"
+import { Color } from "@prisma/client"
 import {
 	Select,
 	SelectContent,
@@ -18,39 +19,48 @@ import {
 import {
 	Form,
 	FormControl,
-	FormDescription,
 	FormField,
 	FormItem,
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form"
-import { revalidatePath } from "next/cache"
+import React from "react"
 
 
 const formSchema = z.object({
 	name: z.string().min(1, {
 		message: 'Category name is required'
 	}),
-	color: z.enum(["WHITE", "BLUE", "GREEN", "YELLOW", "ORANGE", "RED", "PURPLE", "PINK", "BROWN", "GREY", "BLACK"])
+	color: z.nativeEnum(Color)
 })
 
+interface CategoryFormProps {
+	status: 'edit' | 'add'
+	categoryId?: string
+}
 
-const AddCategoryForm = () => {
+
+const CategoryForm: React.FC<CategoryFormProps> = ({status, categoryId}) => {
 
 	const form = useForm<z.infer<typeof formSchema>>({
+		// *Get Values, pass to form
+		// if(status === 'edit'){
+		// const { data } = await getCategory(categoryId)
+	// }
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			name: '',
-			color: undefined
+			// this will be data.*
+			name: initialValues?.name || '',
+			color: initialValues?.color || undefined
 		}
 	})
 
 	async function handleSubmitCategory(data: z.infer<typeof formSchema>) {
 
-		const formData = new FormData();
-		formData.append('name', data.name);
-		formData.append('color', data.color);
-		const result = await addCategory(formData);
+		const formData = new FormData()
+		formData.append('name', data.name)
+		formData.append('color', data.color)
+		const result = await addCategory(formData)
 		if (result.error) {
 			toast({
 				variant: "destructive",
@@ -65,7 +75,7 @@ const AddCategoryForm = () => {
 				duration: 4000
 			})
 			form.reset()
-			//? need to figure out how to close dialog/drawer. pass back up?
+			//? need to figure out how to close dialog/drawer. pass back up?(DrawerCloseButton?)or after adding one, change heading to Add another? and done button instead of cancel
 }
 	}
 
@@ -80,7 +90,7 @@ return (
 					<FormItem>
 						<FormLabel>Name</FormLabel>
 						<FormControl>
-							<Input placeholder="Category Name" {...field} aria-description="Enter a category name" required/>
+							<Input placeholder="Category Name" {...field} aria-description="Enter a category name" value={initialValues?.name} required/>
 						</FormControl>
 						<FormMessage />
 					</FormItem>
@@ -94,7 +104,13 @@ return (
 					<FormItem>
 						<FormLabel>Color</FormLabel>
 						<FormControl>
-							<Select onValueChange={field.onChange} value={field.value}>
+							{/*
+							Choose theme? other => choose color:
+							<input type="color" onValueChange={field.onchange value={field.value} 
+							<dataList rainbow=[blue, green, yellow, orange, red, purple, black, white, gray]>
+							
+							*/}
+							<Select onValueChange={field.onChange} value={initialValues?.color || field.value} required>
 								<SelectTrigger >
 									<SelectValue placeholder="Choose a Color" />
 								</SelectTrigger>
@@ -125,4 +141,4 @@ return (
 	</Form>
 )
 }
-export default AddCategoryForm;
+export default CategoryForm;

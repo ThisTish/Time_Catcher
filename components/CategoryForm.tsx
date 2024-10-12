@@ -24,7 +24,8 @@ import {
 	FormLabel,
 	FormMessage
 } from "@/components/ui/form"
-import React from "react"
+import React, { useEffect } from "react"
+import getCategory from "@/app/actions/getCategory"
 
 
 const formSchema = z.object({
@@ -40,20 +41,35 @@ interface CategoryFormProps {
 }
 
 
-const CategoryForm: React.FC<CategoryFormProps> = ({status, categoryId}) => {
-
+const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 	const form = useForm<z.infer<typeof formSchema>>({
-		// *Get Values, pass to form
-		// if(status === 'edit'){
-		// const { data } = await getCategory(categoryId)
-	// }
 		resolver: zodResolver(formSchema),
 		defaultValues: {
 			// this will be data.*
-			name: initialValues?.name || '',
-			color: initialValues?.color || undefined
+			name:  '',
+			color: undefined
 		}
 	})
+	console.log(status)
+	useEffect(() => {
+		console.log('triggered')
+		async function fetchCategory(){
+			if( status === 'edit' && categoryId){
+				const {data, error} = await getCategory(categoryId)
+				if(data){
+				console.dir(data)
+				}
+				if(error){
+					console.log(error)
+				}
+				form.reset({
+					name: data?.name || '',
+					color: data?.color || undefined
+				})
+			}
+		}
+		fetchCategory()
+	}, [status, categoryId, form])
 
 	async function handleSubmitCategory(data: z.infer<typeof formSchema>) {
 
@@ -75,8 +91,7 @@ const CategoryForm: React.FC<CategoryFormProps> = ({status, categoryId}) => {
 				duration: 4000
 			})
 			form.reset()
-			//? need to figure out how to close dialog/drawer. pass back up?(DrawerCloseButton?)or after adding one, change heading to Add another? and done button instead of cancel
-}
+		}
 	}
 
 return (
@@ -90,7 +105,7 @@ return (
 					<FormItem>
 						<FormLabel>Name</FormLabel>
 						<FormControl>
-							<Input placeholder="Category Name" {...field} aria-description="Enter a category name" value={initialValues?.name} required/>
+							<Input placeholder="Category Name" {...field} aria-description="Enter a category name"  required/>
 						</FormControl>
 						<FormMessage />
 					</FormItem>
@@ -110,7 +125,7 @@ return (
 							<dataList rainbow=[blue, green, yellow, orange, red, purple, black, white, gray]>
 							
 							*/}
-							<Select onValueChange={field.onChange} value={initialValues?.color || field.value} required>
+							<Select onValueChange={field.onChange} required>
 								<SelectTrigger >
 									<SelectValue placeholder="Choose a Color" />
 								</SelectTrigger>
@@ -141,4 +156,4 @@ return (
 	</Form>
 )
 }
-export default CategoryForm;
+export default CategoryForm

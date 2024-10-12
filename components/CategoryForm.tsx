@@ -131,6 +131,7 @@ return (
 								</SelectTrigger>
 								<SelectContent>
 									<SelectGroup>
+										{/* map over colors in theme with values... */}
 										<SelectLabel>Colors</SelectLabel>
 										<SelectItem value="BLUE">Blue</SelectItem>
 										<SelectItem value="GREEN">Green</SelectItem>

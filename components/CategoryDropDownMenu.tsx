@@ -17,7 +17,7 @@ const CategoryDropDown = ({categoryId, categoryName}: {categoryId: string, categ
 				<DropdownMenuLabel>Actions</DropdownMenuLabel>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem asChild>
-					<CategoryDrawer status={"edit"}/>
+					<CategoryDrawer status={"edit"} categoryId={categoryId}/>
 				</DropdownMenuItem>
 				<DropdownMenuItem asChild>
 					<DeleteCategoryButton categoryId={categoryId} categoryName={categoryName} />

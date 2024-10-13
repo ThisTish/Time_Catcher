@@ -27,10 +27,11 @@ import { useState } from 'react'
 import { X } from 'lucide-react'
 
 interface CategoryDrawerProps {
-	status: "edit" | "add";
+	status: "edit" | "add"
+	categoryId?: string
 }
 
-const CategoryDrawer: React.FC<CategoryDrawerProps> = ({status}) => {
+const CategoryDrawer: React.FC<CategoryDrawerProps> = ({status, categoryId}) => {
 	const [open, setOpen] = useState(false)
 	const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -43,7 +44,7 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({status}) => {
 					? (
 						<Button variant="outline">Add Category</Button>
 					):(
-						<Button variant="outline">Edit</Button>
+						<Button variant="outline" data-category-id={categoryId}>Edit</Button>
 					)
 					}
 				</DialogTrigger>
@@ -63,7 +64,7 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({status}) => {
 					}
 						
 					</DialogHeader>
-					<CategoryForm  status={status}/>
+					<CategoryForm  status={status} categoryId={categoryId}/>
 				<DialogFooter>
 					<DialogClose>Cancel</DialogClose>
 				</DialogFooter>

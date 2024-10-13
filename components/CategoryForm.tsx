@@ -45,15 +45,15 @@ const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
 		defaultValues: {
-			// this will be data.*
 			name:  '',
 			color: undefined
 		}
 	})
-	console.log(status)
+
 	useEffect(() => {
 		console.log('triggered')
 		async function fetchCategory(){
+			console.log(`status: ${status} categoryId: ${categoryId} categoryForm`)
 			if( status === 'edit' && categoryId){
 				const {data, error} = await getCategory(categoryId)
 				if(data){
@@ -66,7 +66,9 @@ const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 					name: data?.name || '',
 					color: data?.color || undefined
 				})
+				// console.log(data?.color)
 			}
+			
 		}
 		fetchCategory()
 	}, [status, categoryId, form])

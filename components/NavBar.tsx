@@ -2,6 +2,7 @@ import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@c
 import Link from "next/link";
 import { checkUser } from "@/lib/checkUser"
 import CategoryDrawer from "@/components/CategoryDrawer"
+import AddGoalDrawer from "./AddGoalDrawer"
 
 
 const NavBar = () => {
@@ -18,6 +19,7 @@ const NavBar = () => {
 					<SignedIn>
 						{/* <SignOutButton /> */}
 						<CategoryDrawer status={'add'} />
+						<AddGoalDrawer categoryId=""/>
 						<UserButton appearance={{elements: {avatarBox: 'size-10'} }}/>
 					</SignedIn>
 					</nav>

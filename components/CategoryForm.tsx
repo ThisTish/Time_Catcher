@@ -154,7 +154,11 @@ return (
 					</FormItem>
 				)}
 			/>
-			<Button type="submit">ADD</Button>
+			{status === 'edit'?
+				<Button type="submit">SAVE</Button>
+				:
+				<Button type="submit">ADD</Button>
+			}
 		</form>
 	</Form>
 )

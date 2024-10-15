@@ -1,3 +1,4 @@
+'use server'
 import { db } from "@/lib/db"
 import { Color } from "@prisma/client"
 import { CategoryData, CategoryResults } from "@/lib/types"

@@ -26,6 +26,7 @@ import {
 } from "@/components/ui/form"
 import React, { useEffect } from "react"
 import getCategory from "@/app/actions/getCategory"
+import editCategory from "@/app/actions/editCategory"
 
 
 const formSchema = z.object({
@@ -51,7 +52,6 @@ const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 	})
 
 	useEffect(() => {
-		console.log('triggered')
 		async function fetchCategory(){
 			console.log(`status: ${status} categoryId: ${categoryId} categoryForm`)
 			if( status === 'edit' && categoryId){
@@ -73,7 +73,7 @@ const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 		fetchCategory()
 	}, [status, categoryId, form])
 
-	async function handleSubmitCategory(data: z.infer<typeof formSchema>) {
+	async function handleCreateCategory(data: z.infer<typeof formSchema>) {
 
 		const formData = new FormData()
 		formData.append('name', data.name)
@@ -94,11 +94,44 @@ const CategoryForm: React.FC<CategoryFormProps> =  ({status, categoryId}) => {
 			})
 			form.reset()
 		}
+}
+
+async function handleUpdateCategory(data: z.infer<typeof formSchema>) {
+	if(!categoryId) {
+		toast({
+			variant: 'destructive',
+			description: 'Error updating category'
+		})
+		return
 	}
+
+	const formData = new FormData()
+	formData.append('name', data.name)
+	formData.append('color', data.color)
+	console.log(formData)
+	const result = await editCategory(formData, categoryId)
+	if (result.error) {
+		toast({
+			variant: "destructive",
+			description: `There was a problem with your request.${result.error}`
+		})
+	}
+
+
+	if (result.data) {
+		toast({
+			description: `Category ${result.data[0].name} added successfully!`,
+			duration: 4000
+		})
+		form.reset()
+	}
+}
 
 return (
 	<Form {...form}>
-		<form onSubmit={form.handleSubmit(handleSubmitCategory)} className="space-y-8">
+		<form 
+		onSubmit={status === 'add' ? form.handleSubmit(handleCreateCategory) : form.handleSubmit(handleUpdateCategory)}
+		className="space-y-8">
 			{/* Category Name */}
 			<FormField
 				control={form.control}
@@ -157,7 +190,7 @@ return (
 			{status === 'edit'?
 				<Button type="submit">SAVE</Button>
 				:
-				<Button type="submit">ADD</Button>
+				<Button  type="submit">ADD</Button>
 			}
 		</form>
 	</Form>

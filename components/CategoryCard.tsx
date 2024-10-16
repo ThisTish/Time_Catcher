@@ -18,8 +18,7 @@ import CategoryDropDownMenu from './CategoryDropDownMenu'
 import TimerDisplay from "./TimerDisplay"
 import GoalsSection from "./GoalsSection"
 import CategoryDrawer from "./CategoryDrawer"
-import AddGoalDrawer from './AddGoalDrawer'
-
+import GoalDrawer from "./GoalDrawer"
 
 const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goals, totalTimeByDay, totalTimeByWeek, totalTimeByMonth }) => {
 	const [timer, setTimer] = useState<number>(0)
@@ -58,7 +57,7 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 				{/* Goals */}
 				{goals && goals.length > 0
 					? <GoalsSection goals={goals} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>
-					: <AddGoalDrawer categoryId={id} />
+					: <GoalDrawer status={'add'} categoryId={id} />
 				}
 			</CardContent>
 
@@ -66,7 +65,7 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 			{status === 'idle' ? (
 				<CardFooter >
 					<StartButton categoryId={id} color={color} />
-					<AddGoalDrawer categoryId={id}/>
+					<GoalDrawer status={'add'} categoryId={id}/>
 
 				</CardFooter>
 			) : (
@@ -78,7 +77,7 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 						</div>
 					) : (<>
 						<StartButton categoryId={id} disabled={true} color={color} />
-						<AddGoalDrawer categoryId={id}/>
+						<GoalDrawer status={'add'} categoryId={id}/>
 					</>
 					)
 					}

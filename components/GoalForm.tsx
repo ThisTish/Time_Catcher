@@ -24,6 +24,10 @@ import {
 	FormMessage
 } from "@/components/ui/form"
 import GoalTimeSlider from "./GoalTimeSlider"
+import { useEffect } from "react"
+import getGoal from "@/app/actions/getGoal"
+import editGoal from "@/app/actions/editGoal"
+
 
 
 const formSchema = z.object({
@@ -36,8 +40,13 @@ const formSchema = z.object({
 	period: z.enum(['DAY', 'WEEK', 'MONTH', 'SEASON', 'YEAR'])
 })
 
+interface GoalFormProps {
+	status: 'edit' | 'add'
+	goalId?: string
+	categoryId?: string
+}
 
-const AddGoalForm = ({categoryId}: {categoryId: string}) => {
+const GoalForm: React.FC<GoalFormProps> = ({status, goalId, categoryId }) => {
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -48,14 +57,62 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 		}
 	})
 
-	async function handleSubmitGoal(data: z.infer<typeof formSchema>) {
+	useEffect(() =>{
+		async function fetchGoal(){
+			if(status === 'edit' && goalId){
+				const { data, error } = await getGoal(goalId)
+				if(error) console.log(error)
+
+			form.reset({
+				name: data?.name || '',
+				targetTime: data?.targetTime || 15,
+				period: data?.period || 'DAY'
+			})
+			}
+		}
+		fetchGoal()
+	}, [status, goalId])
+	// create editCategory function
+	async function handleUpdateGoal(data: z.infer<typeof formSchema>){
+		if(!goalId){
+			toast({
+				variant: 'destructive',
+				description: 'Error getting Goal info'
+			})
+			return
+		}
+
+		const formData = new FormData()
+		formData.append('name', data.name)
+		formData.append('targetTime', data.targetTime.toString())
+		formData.append('period', data.period)
+
+		const result = await editGoal(formData, goalId)
+		if(result.error){
+			toast({
+				variant: 'destructive',
+				description: `Problem updating goal ${result.error}`
+			})
+		}
+		if(result.data){
+			toast({
+				description: `Goal was successfully updated`,
+				duration: 4000
+			})
+			form.reset()
+		}
+	}
+
+	async function handleCreateGoal(data: z.infer<typeof formSchema>) {
 
 		const formData = new FormData()
 		formData.append('name', data.name)
 
 		const stringTargetTimeMs = Math.floor(data.targetTime * 60000).toString()
 		formData.append('targetTime', stringTargetTimeMs)
-		formData.append('categoryId', categoryId)
+		if (categoryId) {
+			formData.append('categoryId', categoryId)
+		}
 		formData.append('period', data.period)
 		// console.log(stringTargetTimeMs)
 		const result = await addGoal(formData);
@@ -79,7 +136,7 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(handleSubmitGoal)} className="space-y-8">
+			<form onSubmit={form.handleSubmit(handleCreateGoal)} className="space-y-8">
 				{/* Goal Name */}
 				<FormField
 					control={form.control}
@@ -144,4 +201,4 @@ const AddGoalForm = ({categoryId}: {categoryId: string}) => {
 		</Form>
 	)
 }
-export default AddGoalForm
+export default GoalForm

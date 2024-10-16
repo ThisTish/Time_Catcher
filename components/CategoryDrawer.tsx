@@ -22,7 +22,6 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer"
 import CategoryForm from "./CategoryForm"
-import {CategoryData, CategoryResult} from '@/lib/types'
 import { useState } from 'react'
 import { X } from 'lucide-react'
 

@@ -20,12 +20,18 @@ import {
 	DrawerTrigger,
 } from "@/components/ui/drawer"
 import { Button } from "@/components/ui/button"
-import { X } from 'lucide-react'
-import AddGoalForm from "./AddGoalForm"
 import { useState } from 'react'
+import { X } from 'lucide-react'
+import GoalForm from "./GoalForm"
 
-const AddGoalDrawer
- = ({ categoryId }: { categoryId: string }) => {
+interface GoalDrawerProps { 
+	status: 'edit' | 'add'
+	goalId?: string
+	categoryId?: string
+}
+
+const GoalDrawer: React.FC<GoalDrawerProps> = ({status, goalId, categoryId}) =>{
+
 	const [open, setOpen] = useState(false)
 	const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -33,13 +39,19 @@ const AddGoalDrawer
 		return (
 			<Dialog open={open} onOpenChange={setOpen}>
 				<DialogTrigger asChild>
-					<Button variant="ghost">Add Goal</Button>
+					{status === 'add' 
+					?  <Button variant="ghost">Add Goal</Button> 
+					: <Button variant='ghost'>Edit</Button>
+					}
 				</DialogTrigger>
 				<DialogContent className="sm:max-w-[425px]" data-category-id={categoryId}>
 					<DialogHeader>
-						<DialogTitle>Make a Goal</DialogTitle>
+						{status === 'add' 
+						? <DialogTitle>Make a Goal</DialogTitle>
+						: <DialogTitle>Edit Goal</DialogTitle>
+						}
 					</DialogHeader>
-					<AddGoalForm categoryId={categoryId} />
+					<GoalForm status={status} goalId={goalId} categoryId={categoryId} />
 					<DialogFooter>
 						<DialogClose asChild>
 							<Button variant="outline">Cancel</Button>
@@ -64,7 +76,7 @@ const AddGoalDrawer
 						<DrawerClose><X /></DrawerClose>
 					</div>
 				</DrawerHeader>
-				<AddGoalForm categoryId={categoryId} />
+					<GoalForm status={status} goalId={goalId} categoryId={categoryId} />
 				<DrawerFooter>
 					<DrawerClose asChild>
 						<Button variant="outline">Cancel</Button>
@@ -75,5 +87,5 @@ const AddGoalDrawer
 	)
 }
 
-export default AddGoalDrawer
+export default GoalDrawer
 

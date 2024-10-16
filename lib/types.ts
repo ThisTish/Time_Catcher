@@ -85,3 +85,17 @@ export interface GoalCardProps {
 	totalTimeByWeek?: number | null
 	totalTimeByMonth?: number | null
 }
+
+export interface GoalData {
+	id: string
+	name?: string | null
+    userId: string
+    categoryId: string
+    targetTime: number
+    period: Period
+	completed?: boolean | null
+}
+export interface GoalResult {
+	data?: GoalData
+	error?: string
+}

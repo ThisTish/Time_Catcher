@@ -2,7 +2,7 @@ import { SignInButton, SignOutButton, SignedIn, SignedOut, UserButton } from "@c
 import Link from "next/link";
 import { checkUser } from "@/lib/checkUser"
 import CategoryDrawer from "@/components/CategoryDrawer"
-import AddGoalDrawer from "./AddGoalDrawer"
+import AddGoalDrawer from "./GoalDrawer"
 
 
 const NavBar = () => {

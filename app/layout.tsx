@@ -10,13 +10,28 @@ import getCurrentTimer from "./actions/getCurrentTimer"
 
 
 const cabinetGrotesk = localFont({
-  src:'./fonts/CabinetGrotesk-Variable.woff2',
-  weight: '900',
+  src: [
+    {
+      path: './fonts/CabinetGrotesk-Variable.woff2',
+      weight: '800',
+      style: 'semi-bold'
+    },
+    {
+      path: './fonts/CabinetGrotesk-Medium.woff2',
+      weight: '600',
+      style: 'normal'
+    }
+  ],
   variable: '--font-cabinet'
 })
+// const cabinetGrotesk = localFont({
+//   src:'./fonts/CabinetGrotesk-Variable.woff2',
+//   weight: '800',
+//   variable: '--font-cabinet'
+// })
 
 const satoshi = localFont({
-  src:'./fonts/Satoshi-Variable.woff2',
+  src: './fonts/Satoshi-Variable.woff2',
   weight: '600',
   variable: '--font-satoshi'
 
@@ -35,7 +50,7 @@ export default async function RootLayout({
 }>) {
   const currentTimerContext = await getCurrentTimer()
   let currentTimerData
-  if(currentTimerContext){
+  if (currentTimerContext) {
     currentTimerData = currentTimerContext.data
   }
 
@@ -43,7 +58,8 @@ export default async function RootLayout({
     <ClerkProvider>
       <TimerProvider ongoingTimer={currentTimerData || null}>
         <html lang="en">
-          <body className={`${cabinetGrotesk.variable} ${satoshi.variable}`}
+          <body 
+          className={`${cabinetGrotesk.variable} ${satoshi.variable}`}
           >
             <NavBar />
             {children}

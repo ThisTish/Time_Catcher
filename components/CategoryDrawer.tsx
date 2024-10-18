@@ -41,7 +41,7 @@ const CategoryDrawer: React.FC<CategoryDrawerProps> = ({status, categoryId}) => 
 				<DialogTrigger asChild>
 					{status === 'add' 
 					? (
-						<Button variant="outline">Add Category</Button>
+						<Button variant="outline" >Add Category</Button>
 					):(
 						<Button variant="outline" data-category-id={categoryId}>Edit</Button>
 					)

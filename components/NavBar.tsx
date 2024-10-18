@@ -11,7 +11,7 @@ const NavBar = () => {
 	return (
 		<>
 			<header className="flex justify-between items-center w-full py-9 fixed bg-secondary px-3">
-				<Link href={"/"}><h1 className="text-5xl font-sans">TimeCatcher</h1></Link>
+				<Link href={"/"}><h1 className="text-5xl font-sans font-semibold">TimeCatcher</h1></Link>
 				<nav className="flex gap-3 justify-center items-center text-sm">
 					<SignedOut>
 					<div className="bg-blue-400 text-white rounded-md p-1 text-lg border-2 border-blue-400 hover:bg-transparent hover:text-blue-400 hover:scale-110 transition-all ease-in">

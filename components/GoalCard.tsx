@@ -17,13 +17,14 @@ const GoalCard: React.FC<GoalCardProps> = ({ id, name, targetTime, period, compl
 		<Card className={`bg-gradient-to-t from-slate-100 to-slate-400 to-95% bg-opacity-55 shadow-md text-stone-700 h-44`}>
 			
 				<CardHeader>
-					<CardTitle>{name}</CardTitle>
+					<CardTitle>{period}</CardTitle>
+				<GoalDropdownMenu goalId={id}/>
+
 				</CardHeader>
 			
 			<CardContent>
-				<p>{targetHours}h {targetMinutes}m/ {period}</p>
+				<p>{targetHours}h {targetMinutes}m</p>
 				<TimeToMeetGoalDisplay period={period} targetTime={targetTime} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>
-				<GoalDropdownMenu goalId={id}/>
 
 			</CardContent>
 		</Card>

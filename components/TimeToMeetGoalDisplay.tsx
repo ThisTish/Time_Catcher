@@ -53,8 +53,8 @@ const TimeToMeetGoalDisplay: React.FC<TimeToMeetGoalDisplayProps>= ({targetTime,
 
 
 		<>
-
-		<p>{hours}h {minutes}m </p>
+		<h5 className="font-bold tracking-tight text-lg">Time to go:</h5>
+		<p className="text-end">{hours}h {minutes}m </p>
 		</>
 	);
 }

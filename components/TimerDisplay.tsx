@@ -14,8 +14,8 @@ const TimerDisplay = ({time}: {time: number}) => {
 	return (
 		<div className=" bg-white bg-opacity-45 text-center rounded p-3 font-bold">
 		<p className="text-xl">
-			<Timer className="inline mr-3 shadow-lg"/>
-			<span>{formattedTime}</span>
+			<Timer className="inline mr-3 shadow-lg "/>
+			<span className="font-mono">{formattedTime}</span>
 		</p>
 		</div>
 	)

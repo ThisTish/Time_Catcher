@@ -8,15 +8,18 @@ import Footer from '@/components/Footer'
 import { TimerProvider } from "@/hooks/useTimerContext"
 import getCurrentTimer from "./actions/getCurrentTimer"
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+
+const cabinetGrotesk = localFont({
+  src:'./fonts/CabinetGrotesk-Variable.woff2',
+  weight: '900',
+  variable: '--font-cabinet'
 })
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const satoshi = localFont({
+  src:'./fonts/Satoshi-Variable.woff2',
+  weight: '600',
+  variable: '--font-satoshi'
+
 })
 
 export const metadata: Metadata = {
@@ -40,8 +43,7 @@ export default async function RootLayout({
     <ClerkProvider>
       <TimerProvider ongoingTimer={currentTimerData || null}>
         <html lang="en">
-          <body
-            className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+          <body className={`${cabinetGrotesk.variable} ${satoshi.variable}`}
           >
             <NavBar />
             {children}

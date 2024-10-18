@@ -45,9 +45,9 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 
 
 	return (
-		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-stone-300 `}>
+		<Card className={` relative ${status === 'running' && categoryId === id ? 'shadow-lg' : 'shadow-inner'} bg-stone-300 font-mono`}>
 			<CardHeader>
-				<CardTitle>{name}</CardTitle>
+				<CardTitle className="font-sans">{name}</CardTitle>
 				{/* <DeleteCategoryButton categoryId={id} categoryName={name} /> */}
 				<CategoryDropDownMenu categoryId={id} categoryName={name}/>
 				<TotalTimeDisplay totalTime={totalTime ?? 0} />

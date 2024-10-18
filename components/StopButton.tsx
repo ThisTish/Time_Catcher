@@ -37,7 +37,7 @@ const StopButton = ({ id, startTime }: { id: string | null; startTime: Date | nu
 				data-timelog-id={id}
 				data-start-time={startTime}
 				// make a varient with these classes...except for the scale
-			className={`shadow-lg text-lg hover:scale-125 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75`} 
+			className={`shadow-lg text-lg hover:scale-125 hover:bg-transparent hover:border-2 transition-transform ease-in duration-75 font-mono`} 
 
 			>STOP</Button>
 		</div>

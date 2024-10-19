@@ -51,7 +51,7 @@ async function addGoal(formData: FormData): Promise<GoalResult> {
 			}
 		})
 		revalidatePath('/')
-		console.dir(GoalData)
+		// console.dir(GoalData)
 		return { data: GoalData}
 
 	} catch (error) {

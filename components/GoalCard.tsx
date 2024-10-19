@@ -23,7 +23,7 @@ const GoalCard: React.FC<GoalCardProps> = ({ id, name, targetTime, period, compl
 				</CardHeader>
 			
 			<CardContent className='space-y-3'>
-				<h5 className='text-lg font-bold'>Total Time:</h5>
+				<h5 className='text-lg font-bold'>Target Time:</h5>
 				<p className='text-end'>{targetHours}h {targetMinutes}m</p>
 				<TimeToMeetGoalDisplay period={period} targetTime={targetTime} totalTimeByDay={totalTimeByDay ?? null} totalTimeByWeek={totalTimeByWeek ?? null} totalTimeByMonth={totalTimeByMonth ?? null}/>
 

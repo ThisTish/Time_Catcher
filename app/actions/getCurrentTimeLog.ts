@@ -1,28 +1,28 @@
-// 'use server'
-// import { db } from "@/lib/db"
-// import { TimeLogData, TimeLogResult } from "@/lib/types"
-// import findUser from "./findUser"
+'use server'
+import { db } from "@/lib/db"
+import { TimeLogData, TimeLogResult } from "@/lib/types"
+import findUser from "./findUser"
 
-// const getTimeLog = async (): Promise<TimeLogResult> =>{
-// 	const user = await findUser()
-// 	const userId = user.data?.id.toString()
+const getCurrentTimeLog = async (): Promise<TimeLogResult> =>{
+	const user = await findUser()
+	const userId = user.data?.id.toString()
 
-// 	if (!userId) {
-// 		return { error: 'User login error' }
-// 	}
-// 	const currentTimeLog = await db.timeLog.findFirst({
-// 		where: {
-// 			// userId,
-// 			endTime: null
-// 		}
-// 	})
-// 	if (!currentTimeLog) {
-// 		return { error: 'No current time log found' }
-// 	}
-// 	return { data: currentTimeLog }
-// }
+	if (!userId) {
+		return { error: 'User login error' }
+	}
+	const currentTimeLog = await db.timeLog.findFirst({
+		where: {
+			// userId,
+			endTime: null
+		}
+	})
+	if (!currentTimeLog) {
+		return { error: 'No current time log found' }
+	}
+	return { data: currentTimeLog }
+}
 
-// export default getTimeLog
+export default getCurrentTimeLog
 
 
 

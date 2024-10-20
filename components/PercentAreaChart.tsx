@@ -35,7 +35,7 @@ const PercentAreaChart = async ({ period }: { period?: Period }) => {
 
 	const percentageAreaChartData = async() =>{
 		const user = await findUser()
-	const userId = user.data?.id.toString()
+		const userId = user.data?.id.toString()
 
 	if (!userId) {
 		return { error: 'User login error' }

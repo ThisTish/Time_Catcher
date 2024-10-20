@@ -49,6 +49,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const currentTimerContext = await getCurrentTimer()
+  // while loading, display skeleton in category area.
   let currentTimerData
   if (currentTimerContext) {
     currentTimerData = currentTimerContext.data

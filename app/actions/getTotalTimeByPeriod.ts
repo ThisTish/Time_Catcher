@@ -1,6 +1,8 @@
 import { db } from "@/lib/db"
 import { Period } from "@prisma/client"
 
+// ! need to change this so it takes in a timeFrame instead of period. switch case can setDates instead?
+
 const getTotalTimeByPeriod = async ({categoryId, period}: {categoryId: string, period: Period}): Promise<number | null> =>{
 
 	const currentYear = new Date().getFullYear()

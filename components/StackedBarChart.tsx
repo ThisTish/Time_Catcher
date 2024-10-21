@@ -11,8 +11,8 @@ const StackedBarChart = ({period, info}: {period?: string, info: any}) => {
 
 	return (
 		<> 
-		<h1>Stacked Bar Chart</h1>
-		<ResponsiveContainer width='100%' height={300}>
+		<h1 className='text-xl'>Stacked Bar Chart</h1>
+		<ResponsiveContainer width='50%' height={300}>
 			<BarChart
 			width={500}
 			height={300}

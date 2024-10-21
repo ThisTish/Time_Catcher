@@ -24,7 +24,7 @@ const CategoryCard: React.FC<CategoryData> = ({ name, color, id, totalTime, goal
 	const [timer, setTimer] = useState<number>(0)
 	const { timeLogId, categoryId, status, startTime } = useTimerContext()
 	// useState for card expanded or not
-	
+// console.log(categoryId)
 	// to start timer
 	useEffect(() => {
 		let timerInterval: NodeJS.Timeout | null = null;

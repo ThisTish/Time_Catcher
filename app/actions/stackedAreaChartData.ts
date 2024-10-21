@@ -56,7 +56,6 @@ const stackedAreaChartData = async() =>{
 			})
 		
 			let day = today
-			// let dataObject
 			for(let i = 0; i < 7; i++){
 				day = new Date()
 				day.setDate(day.getDate() - i)

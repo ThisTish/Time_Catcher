@@ -2,7 +2,8 @@ import Guest from "@/components/Guest"
 import { currentUser } from "@clerk/nextjs/server"
 import CategoryCardSection from "@/components/CategoryCardSection"
 // import PercentAreaChart from "@/components/PercentAreaChart"
-import StackedBarChart from "@/components/StackedBarChart"
+// import StackedBarChart from "@/components/StackedBarChart"
+import ChartSection from "@/components/ChartSection"
 export default async function Home() {
 const user = await currentUser()
 
@@ -14,7 +15,7 @@ const user = await currentUser()
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
         <CategoryCardSection />
         {/* <PercentAreaChart /> */}
-        <StackedBarChart />
+        <ChartSection />
       </main>
     </div>
   )

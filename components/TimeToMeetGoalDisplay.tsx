@@ -1,7 +1,10 @@
+'use client'
 import { Period } from "@prisma/client"
 import { db } from "@/lib/db"
 import getTotalTimeByPeriod from "@/app/actions/getTotalTimeByPeriod"
 import { timeFormat } from "@/lib/utils"
+import { useEffect, useState } from "react";
+
 
 interface TimeToMeetGoalDisplayProps {
 	targetTime: number
@@ -12,8 +15,7 @@ interface TimeToMeetGoalDisplayProps {
 }
 
 const TimeToMeetGoalDisplay: React.FC<TimeToMeetGoalDisplayProps>= ({targetTime, period, totalTimeByDay, totalTimeByWeek, totalTimeByMonth})  => {
-
-	if(!totalTimeByDay || !totalTimeByWeek || !totalTimeByMonth) return null
+	if(!totalTimeByDay && !totalTimeByWeek && !totalTimeByMonth) return null
 	// const timeToGoForDay = Math.floor(targetTime - totalTimeByDay) / 1000
 	// const timeToGoForWeek = Math.floor(targetTime - totalTimeByDay) / 1000
 	// const timeToGoForMonth = Math.floor(targetTime - totalTimeByDay) / 1000
@@ -25,28 +27,33 @@ const TimeToMeetGoalDisplay: React.FC<TimeToMeetGoalDisplayProps>= ({targetTime,
 	// const monthMinutes = timeFormat(timeToGoForMonth).minutes
 
 // work on year. and eventually season
-	const getTotalTime = () =>{
-		switch(period){
-			case 'DAY':
-				return totalTimeByDay
-			case 'WEEK':
-				return totalTimeByWeek
-			case 'MONTH':
-				return totalTimeByMonth
-			default:
-					return null
-		}
-	}
 
-	const totalTime = getTotalTime()
-	if(totalTime === null) return null
+const [hours, setHours] = useState<number | null>(null);
+const [minutes, setMinutes] = useState<number | null>(null);
+
+useEffect(() => {
+	const getTotalTime = () => {
+		switch (period) {
+			case 'DAY':
+				return totalTimeByDay;
+			case 'WEEK':
+				return totalTimeByWeek;
+			case 'MONTH':
+				return totalTimeByMonth;
+			default:
+				return null;
+		}
+	};
+
+	const totalTime = getTotalTime();
+	if (totalTime === null) return;
 
 	// if time to go is negative(one, it's not showing?) two, mark goal as completed.
-
-	const timeToGo = Math.floor(targetTime - totalTime) / 1000
-	// console.log(timeToGo)
-	const { hours, minutes } = timeFormat(timeToGo)
-// ok, now need to hone in this and clean it all up a bit. 
+	const timeToGo = Math.floor(targetTime - totalTime) / 1000;
+	const { hours, minutes } = timeFormat(timeToGo);
+	setHours(hours);
+	setMinutes(minutes);
+}, [targetTime, period, totalTimeByDay, totalTimeByWeek, totalTimeByMonth]);
 
 
 	return (

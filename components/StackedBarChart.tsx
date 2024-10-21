@@ -1,100 +1,53 @@
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
-import { PureComponent } from "react"
-import findUser from '@/app/actions/findUser'
-import { db } from '@/lib/db'
+'use client'
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, ResponsiveContainer, Tooltip} from 'recharts'
+
+const StackedBarChart = ({period, info}: {period?: string, info: any}) => {
+
+	if(!info || info.length === 0){
+		return <p>nothing to display yet</p>
+	}
+	// create the array with the category colors in it as well.(or get the categories from the main getCategories function)
+	const categoryKeys = Object.keys(info[0]).filter(key => key !== 'day')
+
+	return (
+		<> 
+		<h1>Stacked Bar Chart</h1>
+		<ResponsiveContainer width='100%' height={300}>
+			<BarChart
+			width={500}
+			height={300}
+			data={info}
+			margin={{
+				top: 20,
+				right: 30,
+				left: 20,
+				bottom: 5
+			}}
+			>
+				{/* <CartesianGrid strokeDasharray="3 3" /> */}
+				<XAxis dataKey='day' />
+				<YAxis />
+				<Tooltip />
+				{categoryKeys.map((category, index) => (
+					<Bar key={category} dataKey={category} stackId='a' fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
+				))}
+			</BarChart>
+			
+		</ResponsiveContainer>
+		</>
+	)
+}
+
+export default StackedBarChart
 
 
-const StackedBarChart = async ({period}: {period?: string}) => {
 
-// 	date: '10/21',
+// 	const data =[
+
+// 	{
+// 	day: '10/21',
 //     category1: 2390,
 //     category2: 3800,
 //     category3: 2500,
-//   },
-
-	const stackedAreaChartData = async() =>{
-		const user = await findUser()
-		if(!user) {
-			return { error: 'Trouble finding user'}
-		}
-		const userId = user.data?.id.toString()
-
-		// let timePeriod
-
-		// switch (period) {
-		// 	case 'WEEK':
-		// 		timePeriod = 'day'
-		// 		break;
-		// 	case 'MONTH':
-		// 		timePeriod = 'week'
-		// 		// make each week clickable to trigger back to exact 'WEEK'?
-		// 		break;
-		// 	case 'YEAR':
-		// 			timePeriod = 'month'
-		// 			// make each month clickable to trigger back to 'MONTH'?
-		// 		break;
-		// 	default: 'WEEK'
-		// 		break;
-		// }
-
-		const today = new Date()
-		let dataArray: {
-			day: Date;
-			[key: string]: any 
-		}[] = []
-		// this is where we make a function to get the time periods.(pass in case from switch case)
-		let beginningOfWeek = today
-		beginningOfWeek.setDate(today.getDate() - 6)
-		const beginningOfWeekIso = beginningOfWeek.toISOString()
-
-		try {
-			const categories = await db.category.findMany({
-				where: {
-					userId
-				},
-				include: {
-					timeLogs: {
-						where: {
-							startTime: {
-								gt: beginningOfWeekIso
-							}
-						}
-					}
-				}
-				})
-			
-				let day = today
-				for(let i = 0; i < 7; i++){
-					day = new Date()
-					day.setDate(day.getDate() - i)
-					day.setHours(0, 0, 0, 0)
-					// console.log(`day ${ day }`)
-				}
-				const categoryArray = categories.map((category) =>{
-					const timeLogArray = category.timeLogs
-					// !problem here ^
-					console.log(timeLogArray)
-					
-					const totalTime = timeLogArray.reduce((acc, log) => acc + log.timePassed, 0)
-					return {
-						day,
-						[category.name]: totalTime
-					}
-				})
-				console.dir(categoryArray)
-		} catch (error) {
-			console.log(`Error getting category times.${error}`)
-		}
-
-
-
-	}
-
-
-	stackedAreaChartData()
-	return ( 
-		<h1>Stacked Bar Chart</h1>
-	);
-}
-
-export default StackedBarChart;
+//   }
+// ]

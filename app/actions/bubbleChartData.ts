@@ -15,13 +15,14 @@
 
 
 import { db } from "@/lib/db"
-import { timeLog } from "console"
+import { error, timeLog } from "console"
 
 
 
 const bubbleChartData = async (categoryId: string) => {
 	const today = new Date()
 	let dataArray: {
+		category: string
 		day: string
 		index: number
 		totalTime: number
@@ -50,8 +51,10 @@ const bubbleChartData = async (categoryId: string) => {
 						}
 					}
 				})
+				if(!timeLogArray) return
 				const totalTime = timeLogArray?.timeLogs.reduce((acc, log) => acc + log.timePassed, 0) ?? 0
 				const dataObject = {
+					category: timeLogArray?.name,
 					day: day.getDate().toString(),
 					index: 1,
 					totalTime

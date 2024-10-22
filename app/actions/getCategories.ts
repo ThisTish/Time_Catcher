@@ -18,7 +18,7 @@ async function getCategories(): Promise<CategoryResults> {
 				userId
 			},
 			include:{
-				goals: true
+				goals: true,
 			}
 		})
 		return { data: categories }

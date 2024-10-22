@@ -1,17 +1,18 @@
 'use client'
-import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { ScatterChart, Scatter, XAxis, YAxis, ZAxis, Tooltip, ResponsiveContainer } from 'recharts'
 
 
 const BubbleChart = ({info}: any) => {
 
 	const domain = [0, 500]
   	const range = [10, 1000]
-	console.dir(info)
+	// console.log(`hey! ${JSON.stringify(info)}`)
 
-	return (
-		<>
+	return (<>
+		<div className='flex flex-col space-y-5 m-20 mb-10 bg-white rounded-md p-10'>
 		<h1 className="text-xl">Bubble Chart</h1>
-		<div>
+		<h2 className='text-lg mx-10'></h2>
+		<div className='mx-24'>
 			<ScatterChart
 				width={700}
 				height={100}
@@ -32,19 +33,21 @@ const BubbleChart = ({info}: any) => {
 				<YAxis
 					type="number"
 					dataKey="index"
-					name="sunday"
+					name={info[0].category}
 					height={10}
 					width={80}
 					tick={false}
 					tickLine={false}
 					axisLine={false}
-					label={{ value: "Sunday", position: "insideRight" }}
+					label={{ value: `${info[0].category}`, position: "insideLeft" }}
 				/>
 				<ZAxis type="number" dataKey="totalTime" domain={domain} range={range} />
 				<Tooltip />
 				<Scatter data={info} fill="#8884d8" />
 			</ScatterChart>
 			</div>
+		</div>
+
 		</>
 		)
 }

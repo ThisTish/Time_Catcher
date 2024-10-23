@@ -60,7 +60,7 @@ export default async function RootLayout({
       <TimerProvider ongoingTimer={currentTimerData || null}>
         <html lang="en">
           <body 
-          className={`${cabinetGrotesk.variable} ${satoshi.variable}`}
+          className={`${cabinetGrotesk.variable} ${satoshi.variable} bg-stone-900`}
           >
             <NavBar />
             {children}

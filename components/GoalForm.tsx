@@ -66,7 +66,7 @@ const GoalForm: React.FC<GoalFormProps> = ({status, goalId, categoryId }) => {
 			form.reset({
 				name: data?.name || '',
 				targetTime: data?.targetTime || 15,
-				period: data?.period || 'DAY'
+				period: data?.period || 'MONTH'
 			})
 			}
 		}
